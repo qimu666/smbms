@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qimu.mapper.ProviderMapper">
+    <!-- List<Provider> dynamicGetAllProvider(Provider provider);-->
+    <resultMap id="getProvider" type="provider">
+        <id column="id" property="id"/>
+        <result property="proCode" column="proCode"/>
+        <result property="proName" column="proName"/>
+        <result property="proDesc" column="proDesc"/>
+        <result property="proContact" column="proContact"/>
+        <result property="proPhone" column="proPhone"/>
+        <result property="proAddress" column="proAddress"/>
+        <result property="proFax" column="proFax"/>
+        <result property="createdBy" column="createdBy"/>
+        <result property="creationDate" column="creationDate"/>
+        <result property="modifyDate" column="modifyDate"/>
+        <result property="modifyBy" column="modifyBy"/>
+    </resultMap>
+    <select id="dynamicGetAllProvider" resultMap="getProvider">
+        select *
+        from smbms_provider
+        <trim prefix="where" suffixOverrides="and">
+            <if test="id !=null and id !=''">
+                id=#{id} and
+            </if>
+            <if test="proCode!=null and proCode!=''">
+                proCode=#{proCode} and
+            </if>
+            <if test="proName!=null and proName!=''">
+                proName =#{proName} and
+            </if>
+            <if test="proDesc!=null and proDesc!=''">
+                proDesc=#{proDesc} and
+            </if>
+            <if test="proContact!=null and proContact!=''">
+                proContact=#{proContact} and
+            </if>
+            <if test="proPhone!=null and proPhone!=''">
+                proPhone=#{proPhone} and
+            </if>
+            <if test="proAddress!=null and proAddress!=''">
+                proAddress=#{proAddress} and
+            </if>
+            <if test="proFax!=null and proFax!=''">
+                proFax=#{proFax} and
+            </if>
+            <if test="createdBy!=null and createdBy!=''">
+                createdBy=#{createdBy} and
+            </if>
+            <if test="creationDate!=null and creationDate!=''">
+                creationDate=#{creationDate} and
+            </if>
+            <if test="modifyDate!=null and modifyDate!=''">
+                modifyDate=#{modifyDate} and
+            </if>
+            <if test="modifyBy!=null and modifyBy!=''">
+                modifyBy=#{modifyBy}
+            </if>
+        </trim>
+    </select>
+    <!-- Integer dynamicAddProvider(Provider provider);-->
+    <insert id="dynamicAddProvider" useGeneratedKeys="true" keyProperty="id">
+        insert into smbms_provider
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id !=null and id !=''">
+                id,
+            </if>
+            <if test="proCode!=null and proCode!=''">
+                proCode,
+            </if>
+            <if test="proName!=null and proName!=''">
+                proName,
+            </if>
+            <if test="proDesc!=null and proDesc!=''">
+                proDesc,
+            </if>
+            <if test="proContact!=null and proContact!=''">
+                proContact,
+            </if>
+            <if test="proPhone!=null and proPhone!=''">
+                proPhone,
+            </if>
+            <if test="proAddress!=null and proAddress!=''">
+                proAddress,
+            </if>
+            <if test="proFax!=null and proFax!=''">
+                proFax,
+            </if>
+            <if test="createdBy!=null and createdBy!=''">
+                createdBy,
+            </if>
+            <if test="creationDate!=null and creationDate!=''">
+                creationDate,
+            </if>
+            <if test="modifyDate!=null and modifyDate!=''">
+                modifyDate,
+            </if>
+            <if test="modifyBy!=null and modifyBy!=''">
+                modifyBy
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id !=null and id !=''">
+                #{id},
+            </if>
+            <if test="proCode!=null and proCode!=''">
+                #{proCode} ,
+            </if>
+            <if test="proName!=null and proName!=''">
+                #{proName} ,
+            </if>
+            <if test="proDesc!=null and proDesc!=''">
+                #{proDesc} ,
+            </if>
+            <if test="proContact!=null and proContact!=''">
+                #{proContact} ,
+            </if>
+            <if test="proPhone!=null and proPhone!=''">
+                #{proPhone} ,
+            </if>
+            <if test="proAddress!=null and proAddress!=''">
+                #{proAddress} ,
+            </if>
+            <if test="proFax!=null and proFax!=''">
+                #{proFax} ,
+            </if>
+            <if test="createdBy!=null and createdBy!=''">
+                #{createdBy} ,
+            </if>
+            <if test="creationDate!=null and creationDate!=''">
+                #{creationDate} ,
+            </if>
+            <if test="modifyDate!=null and modifyDate!=''">
+                #{modifyDate} ,
+            </if>
+            <if test="modifyBy!=null and modifyBy!=''">
+                #{modifyBy}
+            </if>
+        </trim>
+    </insert>
+    <!--Integer dynamicUpdateProviderById(Provider provider);-->
+    <update id="dynamicUpdateProviderById">
+        update smbms_provider
+        <set>
+            <if test="id !=null and id !=''">
+                id=#{id} ,
+            </if>
+            <if test="proCode!=null and proCode!=''">
+                proCode=#{proCode} ,
+            </if>
+            <if test="proName!=null and proName!=''">
+                proName =#{proName} ,
+            </if>
+            <if test="proDesc!=null and proDesc!=''">
+                proDesc=#{proDesc} ,
+            </if>
+            <if test="proContact!=null and proContact!=''">
+                proContact=#{proContact} ,
+            </if>
+            <if test="proPhone!=null and proPhone!=''">
+                proPhone=#{proPhone} ,
+            </if>
+            <if test="proAddress!=null and proAddress!=''">
+                proAddress=#{proAddress} ,
+            </if>
+            <if test="proFax!=null and proFax!=''">
+                proFax=#{proFax} ,
+            </if>
+            <if test="createdBy!=null and createdBy!=''">
+                createdBy=#{createdBy} ,
+            </if>
+            <if test="creationDate!=null and creationDate!=''">
+                creationDate=#{creationDate} ,
+            </if>
+            <if test="modifyDate!=null and modifyDate!=''">
+                modifyDate=#{modifyDate} ,
+            </if>
+            <if test="modifyBy!=null and modifyBy!=''">
+                modifyBy=#{modifyBy}
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+    <!--Integer dynamicDeleteProviderById(@Param("id") Integer[] id);-->
+    <delete id="dynamicDeleteProviderById">
+        delete from smbms_provider where id in
+        <foreach collection="id" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+
+    <!-- List<Provider> findBillByProvider();-->
+    <resultMap id="findBillByProvider" type="provider">
+        <id column="id" property="id"/>
+        <result column="proCode" property="proCode"/>
+        <result column="proName" property="proName"/>
+        <association property="bills" javaType="Bill">
+            <result column="providerId" property="providerId"/>
+            <result column="billCode" property="billCode"/>
+            <result column="productName" property="productName"/>
+        </association>
+    </resultMap>
+    <select id="findBillByProvider" resultMap="findBillByProvider">
+        SELECT p.proCode,
+               p.proName,
+               p.id,
+               b.providerId,
+               b.billCode,
+               b.productName
+        FROM `smbms_provider` p
+                 LEFT JOIN smbms_bill b
+                           ON p.id = b.providerId
+    </select>
+
+</mapper>
