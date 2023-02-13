@@ -1,4 +1,4 @@
-package com.qimu.pojo;
+package com.qimu.model.pojo;
 
 import java.sql.Timestamp;
 

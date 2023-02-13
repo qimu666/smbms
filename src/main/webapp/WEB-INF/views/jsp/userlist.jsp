@@ -84,10 +84,10 @@
                     <span><a class="modifyUser" href="javascript:;" userid="${user.id }"
                              username="${user.userName}"><img
                             src="${pageContext.request.contextPath }/static/images/xiugai.png" alt="修改" title="修改"/></a></span>
-                    <span><a class="deleteUser" href="javascript:;" userid="${user.id }"
-                             username="${user.userName }"><img
+                    <span><span class="deleteUser" userid="${user.id }"
+                                username="${user.userName }"><img
                             src="${pageContext.request.contextPath }/static/images/schu.png" alt="删除"
-                            title="删除"/></a></span>
+                            title="删除"/></span></span>
                 </td>
             </tr>
         </c:forEach>

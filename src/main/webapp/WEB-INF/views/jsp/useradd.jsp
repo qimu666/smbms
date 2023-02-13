@@ -8,9 +8,7 @@
         <span>用户管理页面 >> 用户添加页面</span>
     </div>
     <div class="providerAdd">
-        <form id="userForm" name="userForm" method="post" action="${pageContext.request.contextPath }/user/user.do"
-        >
-            <input type="hidden" name="method" value="add">
+        <form id="userForm" name="userForm" method="post" action="${pageContext.request.contextPath }/user/user.do">
             <!--div的class 为error是验证错误，ok是验证成功-->
             <div>
                 <label for="userCode">用户编码：</label>
@@ -40,12 +38,12 @@
                     <option value="2">女</option>
                 </select>
             </div>
-                        <div>
-                            <label for="birthday">出生日期：</label>
-                            <input type="text" Class="Wdate" id="birthday" name="birthday"
-                                   readonly="readonly" onclick="WdatePicker();">
-                            <font color="red"></font>
-                        </div>
+            <%--                        <div>--%>
+            <%--                            <label for="birthday">出生日期：</label>--%>
+            <%--                            <input type="text" Class="Wdate" id="birthday" name="birthday"--%>
+            <%--                                   readonly="readonly" onclick="WdatePicker();">--%>
+            <%--                            <font color="red"></font>--%>
+            <%--                        </div>--%>
             <div>
                 <label for="phone">用户电话：</label>
                 <input type="text" name="phone" id="phone" value="">

@@ -1,7 +1,7 @@
 package com.qimu.service.impl;
 
 import com.qimu.mapper.ProviderMapper;
-import com.qimu.pojo.Provider;
+import com.qimu.model.pojo.Provider;
 import com.qimu.service.ProviderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

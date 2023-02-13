@@ -1,4 +1,4 @@
-package com.qimu.common;
+package com.qimu.constant;
 
 /**
  * @author: QiMu

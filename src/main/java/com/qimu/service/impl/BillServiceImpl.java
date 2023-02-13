@@ -1,7 +1,7 @@
 package com.qimu.service.impl;
 
 import com.qimu.mapper.BillMapper;
-import com.qimu.pojo.Bill;
+import com.qimu.model.pojo.Bill;
 import com.qimu.service.BillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

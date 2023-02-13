@@ -1,10 +1,9 @@
-package com.qimu.pojo;
+package com.qimu.model.pojo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Date;
-import java.text.SimpleDateFormat;
 
 
 public class User {

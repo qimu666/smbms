@@ -34,18 +34,16 @@ $(function () {
 
     $.ajax({
         type: "GET",//请求类型
-        url: path + "/user/user.do",//请求的url
-        data: {method: "getrolelist"},//请求参数
+        url: path + "/user/user_role_list",//请求的url
         dataType: "json",//ajax接口（请求url）返回的数据类型
         success: function (data) {//data：返回数据（json对象）
-            if (data != null) {
+            if (data) {
                 userRole.html("");
-                console.log(data)
                 var options = "<option value=\"0\">请选择</option>";
-                for (var i = 0; i < data.length; i++) {
+                for (var i = 0; i < data.data.length; i++) {
                     // alert(data[i].id);
                     // alert(data[i].roleName);
-                    options += "<option value=\"" + data[i].id + "\">" + data[i].roleName + "</option>";
+                    options += "<option value=\"" + data.data[i].id + "\">" + data.data[i].roleName + "</option>";
                 }
                 userRole.html(options);
             }
@@ -66,11 +64,11 @@ $(function () {
         //user.do?method=ucexist&userCode=**
         $.ajax({
             type: "GET",//请求类型
-            url: path + "/user/user.do",//请求的url
-            data: {method: "ucexist", userCode: userCode.val()},//请求参数
+            url: path + "/user/user_code",//请求的url
+            data: {userCode: userCode.val()},//请求参数
             dataType: "json",//ajax接口（请求url）返回的数据类型
             success: function (data) {//data：返回数据（json对象）
-                if (data.userCode == "exist") {//账号已存在，错误提示
+                if (data.code === -1) {//账号已存在，错误提示
                     validateTip(userCode.next(), {"color": "red"}, imgNo + " 该用户账号已存在", false);
                 } else {//账号可用，正确提示
                     validateTip(userCode.next(), {"color": "green"}, imgYes + " 该账号可以使用", true);

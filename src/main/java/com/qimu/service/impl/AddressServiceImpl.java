@@ -1,7 +1,7 @@
 package com.qimu.service.impl;
 
 import com.qimu.mapper.AddressMapper;
-import com.qimu.pojo.Address;
+import com.qimu.model.pojo.Address;
 import com.qimu.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

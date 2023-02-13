@@ -1,7 +1,6 @@
 package com.qimu.service;
 
-import com.qimu.pojo.User;
-import org.apache.ibatis.annotations.Param;
+import com.qimu.model.pojo.User;
 
 import java.util.HashMap;
 import java.util.List;

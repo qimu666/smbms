@@ -9,7 +9,7 @@
         <setting name="logImpl" value="LOG4J"/>
     </settings>
     <typeAliases>
-        <package name="com.qimu.pojo"/>
+        <package name="com.qimu.model.pojo"/>
     </typeAliases>
     <plugins>
         <plugin interceptor="com.github.pagehelper.PageInterceptor"></plugin>

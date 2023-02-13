@@ -2,7 +2,7 @@
 package com.qimu.test;
 
 import com.qimu.controller.IUserController;
-import com.qimu.pojo.User;
+import com.qimu.model.pojo.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -8,7 +8,6 @@
     </div>
     <div class="providerAdd">
         <form id="userForm" name="userForm" method="post" action="${pageContext.request.contextPath }/user/user.do">
-            <input type="hidden" name="method" value="modifyexe">
             <input type="hidden" name="id" value="${user.id }"/>
             <div>
                 <label for="userName">用户名称：</label>

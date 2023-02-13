@@ -1,6 +1,6 @@
 package com.qimu.mapper;
 
-import com.qimu.pojo.User;
+import com.qimu.model.pojo.User;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

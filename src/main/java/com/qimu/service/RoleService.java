@@ -1,6 +1,6 @@
 package com.qimu.service;
 
-import com.qimu.pojo.Role;
+import com.qimu.model.pojo.Role;
 
 import java.util.List;
 

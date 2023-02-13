@@ -245,14 +245,14 @@
         </where>
     </select>
 
-    <select id="isLogin" resultType="com.qimu.pojo.User">
+    <select id="isLogin" resultType="com.qimu.model.pojo.User">
         select *
         from smbms_user
         where userCode = #{userCode}
           and userPassword = #{userPassword}
     </select>
 
-    <select id="getUser" resultType="com.qimu.pojo.User">
+    <select id="getUser" resultType="com.qimu.model.pojo.User">
         select *
         from smbms_user
         where userCode = #{userCode}

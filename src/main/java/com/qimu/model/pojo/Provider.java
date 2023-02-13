@@ -1,7 +1,6 @@
-package com.qimu.pojo;
+package com.qimu.model.pojo;
 
 import java.sql.Timestamp;
-import java.util.List;
 
 public class Provider {
     private Integer id;

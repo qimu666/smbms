@@ -1,6 +1,6 @@
 package com.qimu.service;
 
-import com.qimu.pojo.Address;
+import com.qimu.model.pojo.Address;
 
 import java.util.List;
 

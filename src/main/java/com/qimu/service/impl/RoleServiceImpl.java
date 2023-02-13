@@ -1,7 +1,7 @@
 package com.qimu.service.impl;
 
 import com.qimu.mapper.RoleMapper;
-import com.qimu.pojo.Role;
+import com.qimu.model.pojo.Role;
 import com.qimu.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,7 @@
 package com.qimu.service;
 
 
-import com.qimu.pojo.Bill;
+import com.qimu.model.pojo.Bill;
 
 import java.util.List;
 
