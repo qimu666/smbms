@@ -1,3 +1,5 @@
+import {save} from "./common/common.js";
+
 var userName = null;
 var birthday = null;
 var phone = null;
@@ -5,23 +7,21 @@ var userRole = null;
 var saveBtn = null;
 var backBtn = null;
 var userForm = null;
-
+let gender = null;
 
 $(function () {
     userName = $("#userName");
     birthday = $("#birthday");
     phone = $("#phone");
     userRole = $("#userRole");
+    gender = $("#gender").val()
     saveBtn = $("#save");
     backBtn = $("#back");
     userForm = $("#userForm");
-
-
     userName.next().html("*");
     birthday.next().html("*");
     phone.next().html("*");
     userRole.next().html("*");
-
 
     $.ajax({
         type: "GET",//请求类型
@@ -106,9 +106,9 @@ $(function () {
             // && birthday.attr("validateStatus") == "true"
             && userRole.attr("validateStatus") == "true"
         ) {
-            if (confirm("是否确认要提交数据？")) {
-                userForm.submit();
-            }
+
+            // 发送请求
+            save()
         }
     });
 

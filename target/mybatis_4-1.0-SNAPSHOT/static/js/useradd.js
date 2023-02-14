@@ -1,3 +1,5 @@
+import {save} from "./common/common.js";
+
 var userCode = null;
 var userName = null;
 var userPassword = null;
@@ -8,7 +10,8 @@ var userRole = null;
 var addBtn = null;
 var address = null;
 var backBtn = null;
-var userForm =null;
+var userForm = null;
+
 
 $(function () {
     userCode = $("#userCode");
@@ -21,7 +24,7 @@ $(function () {
     userRole = $("#userRole");
     addBtn = $("#addR");
     backBtn = $("#back");
-    userForm =$("#userForm");
+    userForm = $("#userForm");
     //初始化的时候，要把所有的提示信息变为：* 以提示必填项，更灵活，不要写在页面上
     userCode.next().html("*");
     userName.next().html("*");
@@ -37,13 +40,11 @@ $(function () {
         url: path + "/user/user_role_list",//请求的url
         dataType: "json",//ajax接口（请求url）返回的数据类型
         success: function (data) {//data：返回数据（json对象）
-            if (data) {
+            if (data && data.code === 0) {
                 userRole.html("");
                 var options = "<option value=\"0\">请选择</option>";
                 for (var i = 0; i < data.data.length; i++) {
-                    // alert(data[i].id);
-                    // alert(data[i].roleName);
-                    options += "<option value=\"" + data.data[i].id + "\">" +data.data[i].roleName + "</option>";
+                    options += "<option value=\"" + data.data[i].id + "\">" + data.data[i].roleName + "</option>";
                 }
                 userRole.html(options);
             }
@@ -68,10 +69,14 @@ $(function () {
             data: {userCode: userCode.val()},//请求参数
             dataType: "json",//ajax接口（请求url）返回的数据类型
             success: function (data) {//data：返回数据（json对象）
-                if (data.code === -1) {//账号已存在，错误提示
-                    validateTip(userCode.next(), {"color": "red"}, imgNo + " 该用户账号已存在", false);
-                } else {//账号可用，正确提示
-                    validateTip(userCode.next(), {"color": "green"}, imgYes + " 该账号可以使用", true);
+                if (data.code === 0) {
+                    validateTip(userCode.next(), {"color": "green"}, imgYes + "该账号可以注册", true);
+                }
+                if (data.code === 40102) {//账号已存在，错误提示
+                    validateTip(userCode.next(), {"color": "red"}, imgNo + "用户名已在,不可以注册", false);
+                }
+                if (data.code === 40000) {//
+                    validateTip(userCode.next(), {"color": "red"}, imgNo + "用户编码为空", false);
                 }
             },
             error: function (data) {//当访问时候，404，500 等非200的错误状态码
@@ -174,8 +179,8 @@ $(function () {
         } else if (ruserPassword.attr("validateStatus") != "true") {
             ruserPassword.blur();
         }
-        // else if (birthday.attr("validateStatus") != "true") {
-        //     birthday.blur();
+            // else if (birthday.attr("validateStatus") != "true") {
+            //     birthday.blur();
         // }
         else if (phone.attr("validateStatus") != "true") {
             phone.blur();
@@ -184,9 +189,7 @@ $(function () {
         } else if (userRole.attr("validateStatus") != "true") {
             userRole.blur();
         } else {
-            if (confirm("是否确认提交数据")) {
-                userForm.submit();
-            }
+            save()
         }
     });
 

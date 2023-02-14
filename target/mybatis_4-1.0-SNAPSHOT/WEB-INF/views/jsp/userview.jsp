@@ -15,7 +15,7 @@
 					<c:if test="${user.gender == 2 }">女</c:if>
 				</span>
         </p>
-        <p><strong>出生日期：</strong><span>${user.birthday }</span></p>
+        <p><strong>出生日期：</strong><span>${birthday }</span></p>
         <p><strong>用户电话：</strong><span>${user.phone }</span></p>
         <p><strong>用户地址：</strong><span>${user.address }</span></p>
         <p><strong>用户角色：</strong><span>${user.role.roleName}</span></p>
@@ -26,4 +26,4 @@
 </div>
 </section>
 <%@include file="../jsp/common/foot.jsp" %>
-<script type="text/javascript" src="${pageContext.request.contextPath }/static/js/userview.js"></script>
+<script type="module" src="${pageContext.request.contextPath }/static/js/userview.js"></script>

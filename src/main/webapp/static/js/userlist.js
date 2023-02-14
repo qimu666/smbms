@@ -1,3 +1,4 @@
+
 var userObj;
 
 // 用户管理页面上点击删除按钮弹出删除框(userlist.jsp)
@@ -8,13 +9,13 @@ function deleteUser(obj) {
         // data: {"_method":"DELETE"},
         dataType: "json",
         success: function (data) {
-            if (data.code === 1) {//删除成功：移除删除行
+            if (data.code === 0) {//删除成功：移除删除行
                 cancleBtn();
                 obj.parents("tr").remove();
-            } else if (data.code === -1) {//删除失败
+            } else if (data.code === 40002) {//删除失败
                 //alert("对不起，删除用户【"+obj.attr("username")+"】失败");
                 changeDLGContent("对不起，删除用户【" + obj.attr("username") + "】失败");
-            } else if (data.code === -2) {
+            } else if (data.code === 40102) {
                 //alert("对不起，用户【"+obj.attr("username")+"】不存在");
                 changeDLGContent("对不起，用户【" + obj.attr("username") + "】不存在");
             }
@@ -54,7 +55,7 @@ $(function () {
         var obj = $(this);
         window.location.href = path + "/user/userView/" + obj.attr("userid");
     });
-
+    console.log(path)
     $(".modifyUser").on("click", function () {
         var obj = $(this);
         window.location.href = path + "/user/update/" + obj.attr("userid");

@@ -8,7 +8,7 @@
     </div>
     <div class="providerAdd">
         <form id="userForm" name="userForm" method="post" action="${pageContext.request.contextPath }/user/user.do">
-            <input type="hidden" name="id" value="${user.id }"/>
+            <input type="hidden" name="id" id="id" value="${user.id }"/>
             <div>
                 <label for="userName">用户名称：</label>
                 <input type="text" name="userName" id="userName" value="${user.userName }">
@@ -22,19 +22,19 @@
                             <option value="1" selected="selected">男</option>
                             <option value="2">女</option>
                         </c:when>
-                        <c:otherwise>
+                        <c:when test="${user.gender == 2 }">
                             <option value="1">男</option>
                             <option value="2" selected="selected">女</option>
-                        </c:otherwise>
+                        </c:when>
                     </c:choose>
                 </select>
             </div>
-<%--            <div>--%>
-<%--                <label for="data">出生日期：</label>--%>
-<%--                <input type="text" Class="Wdate" id="birthday" name="birthday" value="${user.birthday }"--%>
-<%--                       readonly="readonly" onclick="WdatePicker();">--%>
-<%--                <font color="red"></font>--%>
-<%--            </div>--%>
+            <div>
+                <label for="data">出生日期：</label>
+                <input type="text" Class="Wdate" id="birthday" name="birthday" value="${birthday}"
+                       readonly="readonly" onclick="WdatePicker();">
+                <font color="red"></font>
+            </div>
 
             <div>
                 <label for="userphone">用户电话：</label>
@@ -61,4 +61,4 @@
 </div>
 </section>
 <%@include file="../jsp/common/foot.jsp" %>
-<script type="text/javascript" src="${pageContext.request.contextPath }/static/js/usermodify.js"></script>
+<script type="module" src="${pageContext.request.contextPath }/static/js/usermodify.js"></script>

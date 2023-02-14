@@ -1,18 +1,25 @@
 package com.qimu.controller;
 
 import com.qimu.common.BaseResponse;
+import com.qimu.common.ErrorCode;
 import com.qimu.common.ResultUtil;
 import com.qimu.constant.UserConstant;
+import com.qimu.exception.BusinessException;
 import com.qimu.model.pojo.Role;
 import com.qimu.model.pojo.User;
+import com.qimu.model.request.PageRequest;
 import com.qimu.service.IUserService;
 import com.qimu.service.RoleService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -32,26 +39,23 @@ public class IUserController {
      * @return
      */
     @PostMapping("/login.do")
-    public String login(User user, HttpServletRequest request) {
-        User u = iUserService.isLogin(user.getUserCode(), user.getUserPassword());
-        System.out.println(u);
+    @ResponseBody
+    public BaseResponse<String> login(@RequestBody User user, HttpServletRequest request) {
+        User u = iUserService.userLogin(user.getUserCode(), user.getUserPassword(), request);
         if (u == null) {
-            request.getSession().setAttribute("error", "账号密码有误！");
-            return "../login";
+            throw new BusinessException(ErrorCode.RESULT_ERROR, "账号密码有误！");
         }
-        request.getSession().setAttribute(UserConstant.USER_LOGIN_STATUS, u);
-        return "redirect:/user/users.do";
+        return ResultUtil.success(ErrorCode.SUCCESS);
     }
 
     // 用户管理页面数据及分页
-    @GetMapping("/users.do")
-    public String query(@RequestParam(defaultValue = "1") Integer pageIndex, String queryname, Integer queryUserRole, Model model) {
+    @GetMapping("/search")
+    public String query(@RequestParam(defaultValue = "1") Integer pageIndex, String userName, Integer userRole, Model model) {
         // todo 修改用户角色查询
         Role role = new Role();
         List<Role> allRole = roleService.getAllRole(role);
-        role.setId(queryUserRole);
         Integer pageSize = 8;
-        HashMap<String, Object> map = iUserService.findUserAndRole(role.getId(), queryname, pageIndex, pageSize);
+        HashMap<String, Object> map = iUserService.findUserAndRole(userRole, userName, pageIndex, pageSize);
         model.addAttribute("roleList", allRole);
         List<User> userList = (List<User>) map.get("userList");
         System.err.println(userList);
@@ -60,8 +64,8 @@ public class IUserController {
         model.addAttribute("totalPageCount", map.get("pageTotal"));
         System.err.println(map.get("pageTotal"));
         model.addAttribute("currentPageNo", map.get("nowPage"));
-        model.addAttribute("queryUserRole", map.get("queryUserRole"));
-        model.addAttribute("queryname", map.get("queryname"));
+        model.addAttribute("userRole", map.get("userRole"));
+        model.addAttribute("userName", map.get("userName"));
         return "userlist";
     }
 
@@ -71,17 +75,16 @@ public class IUserController {
         if (uid != null) {
             Integer[] ids = {uid};
             if (uid <= 0) {
-                // todo 异常返回类
-                return ResultUtil.error(-2, "用户不存在");
+                throw new BusinessException(ErrorCode.REQUEST_NULL_ERROR, "用户不存在");
             }
             Integer result = iUserService.dynamicDeleteUserById(ids);
             if (result < 0) {
-                return ResultUtil.error(-1, "删除失败");
+                throw new BusinessException(ErrorCode.OPERATE_ERROR, "删除失败");
             } else {
-                return ResultUtil.success(1);
+                throw new BusinessException(ErrorCode.SUCCESS, "删除成功");
             }
         }
-        return ResultUtil.error(-1, "删除失败");
+        throw new BusinessException(ErrorCode.OPERATE_ERROR, "删除失败");
     }
 
     @GetMapping("/user_code")
@@ -90,10 +93,13 @@ public class IUserController {
         User user = new User();
         user.setUserCode(userCode);
         User users = iUserService.getUser(user);
-        if (users == null) {
-            return ResultUtil.success(1, "可以注册");
+        if (StringUtils.isAnyBlank(user.getUserCode())) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "用户编码为空");
         }
-        return ResultUtil.error(-1, "用户名存在，不可以注册");
+        if (users == null) {
+            throw new BusinessException(ErrorCode.SUCCESS, "可以注册该账号");
+        }
+        throw new BusinessException(ErrorCode.RESULT_ERROR, "用户名已在，不可以注册");
     }
 
     @GetMapping("/user_role_list")
@@ -101,26 +107,29 @@ public class IUserController {
     public BaseResponse<List<Role>> userRoleList() {
         List<Role> allRole = roleService.getAllRole(null);
         // ajax查寻roleName
-        if (!allRole.isEmpty()) {
-            return ResultUtil.success(1, allRole, "", "");
+        if (allRole.isEmpty()) {
+            throw new BusinessException(ErrorCode.RESULT_ERROR, "角色不存在");
         }
-        return ResultUtil.error(-1, "角色不存在");
+        return ResultUtil.success(allRole, ErrorCode.SUCCESS);
     }
 
     /**
      * 查看用户
      *
      * @param id
-     * @param model
      * @return
      */
     @GetMapping("/userView/{uid}")
-    public String userView(@PathVariable("uid") Integer id, Model model) {
+    public String userView(@PathVariable("uid") Integer id, Model model) throws ParseException {
         User user = new User();
         user.setId(id);
         List<User> users = iUserService.findUserRole(user.getId(), null);
         if (!users.isEmpty()) {
+            Date birthday = users.get(0).getBirthday();
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String format = simpleDateFormat.format(birthday);
             model.addAttribute("user", users.get(0));
+            model.addAttribute("birthday", format);
         }
         return "userview";
     }
@@ -137,8 +146,11 @@ public class IUserController {
         User user = new User();
         user.setId(id);
         List<User> users = iUserService.dynamicGetAllUser(user);
-        System.err.println(users);
+        Date birthday = users.get(0).getBirthday();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String format = simpleDateFormat.format(birthday);
         model.addAttribute("user", users.get(0));
+        model.addAttribute("birthday", format);
         List<Role> allRole = roleService.getAllRole(null);
         model.addAttribute("role", allRole.get(0));
         return "usermodify";
@@ -161,16 +173,22 @@ public class IUserController {
      * @return
      */
     @PostMapping("/user.do")
-    public String useradd(User user) {
+    @ResponseBody
+    public BaseResponse<String> useradd(@RequestBody User user) throws ParseException {
         if (user != null) {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String format = simpleDateFormat.format(user.getBirthday());
+            Date parse = simpleDateFormat.parse(format);
+            user.setBirthday(parse);
             if (user.getId() == null) {
                 iUserService.dynamicAddUser(user);
+                return ResultUtil.success(ErrorCode.SUCCESS, "添加成功");
             } else {
                 iUserService.dynamicUpdateUserById(user);
+                return ResultUtil.success(ErrorCode.SUCCESS, "修改成功");
             }
-            return "redirect:/user/users.do";
         }
-        return "redirect:/user/users.do";
+        return ResultUtil.success(ErrorCode.OPERATE_ERROR, "操作失败");
     }
 
     @GetMapping("/logout.do")

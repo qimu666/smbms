@@ -49,7 +49,7 @@
             <if test="gender!=null and gender!=''">
                 gender=#{gender} and
             </if>
-            <if test="birthday!=null and birthday!=''">
+            <if test="birthday!=null">
                 birthday=#{birthday} and
             </if>
             <if test="phone!=null and phone!=''">
@@ -64,13 +64,13 @@
             <if test="createdBy!=null and createdBy!=''">
                 createdBy=#{createdBy} and
             </if>
-            <if test="creationDate!=null and creationDate!=''">
+            <if test="creationDate!=null">
                 creationDate=#{creationDate} and
             </if>
             <if test="modifyBy!=null and modifyBy!=''">
                 modifyBy=#{modifyBy} and
             </if>
-            <if test="modifyDate!=null and modifyDate!=''">
+            <if test="modifyDate!=null">
                 modifyDate=#{modifyDate}
             </if>
         </trim>
@@ -94,7 +94,7 @@
             <if test="gender!=null and gender!=''">
                 gender,
             </if>
-            <if test="birthday!=null and birthday!=''">
+            <if test="birthday!=null">
                 birthday,
             </if>
             <if test="phone!=null and phone!=''">
@@ -109,13 +109,13 @@
             <if test="createdBy!=null and createdBy!=''">
                 createdBy,
             </if>
-            <if test="creationDate!=null and creationDate!=''">
+            <if test="creationDate!=null">
                 creationDate,
             </if>
             <if test="modifyBy!=null and modifyBy!=''">
                 modifyBy,
             </if>
-            <if test="modifyDate!=null and modifyDate!=''">
+            <if test="modifyDate!=null">
                 modifyDate
             </if>
         </trim>
@@ -136,7 +136,7 @@
             <if test="gender!=null and gender!=''">
                 #{gender},
             </if>
-            <if test="birthday!=null and birthday!=''">
+            <if test="birthday!=null">
                 #{birthday} ,
             </if>
             <if test="phone!=null and phone!=''">
@@ -151,13 +151,13 @@
             <if test="createdBy!=null and createdBy!=''">
                 #{createdBy} ,
             </if>
-            <if test="creationDate!=null and creationDate!=''">
+            <if test="creationDate!=null">
                 #{creationDate} ,
             </if>
             <if test="modifyBy!=null and modifyBy!=''">
                 #{modifyBy} ,
             </if>
-            <if test="modifyDate!=null and modifyDate!=''">
+            <if test="modifyDate!=null">
                 #{modifyDate}
             </if>
         </trim>
@@ -181,7 +181,7 @@
             <if test="gender!=null and gender!=''">
                 gender=#{gender} ,
             </if>
-            <if test="birthday!=null and birthday!=''">
+            <if test="birthday!=null">
                 birthday=#{birthday} ,
             </if>
             <if test="phone!=null and phone!=''">
@@ -196,13 +196,13 @@
             <if test="createdBy!=null and createdBy!=''">
                 createdBy=#{createdBy} ,
             </if>
-            <if test="creationDate!=null and creationDate!=''">
+            <if test="creationDate!=null">
                 creationDate=#{creationDate} ,
             </if>
             <if test="modifyBy!=null and modifyBy!=''">
                 modifyBy=#{modifyBy} ,
             </if>
-            <if test="modifyDate!=null and modifyDate!=''">
+            <if test="modifyDate!=null">
                 modifyDate=#{modifyDate}
             </if>
         </set>
@@ -219,6 +219,7 @@
     <resultMap id="findUserAndRole" type="user">
         <id property="id" column="id"></id>
         <result property="userCode" column="userCode"/>
+        <result property="userRole" column="userRole"/>
         <result property="gender" column="gender"/>
         <result property="birthday" column="birthday"/>
         <result property="address" column="address"/>
@@ -237,10 +238,10 @@
         ON u.userRole = r.`id`
         <where>
             <if test="id!=null and id!=0">
-                and r.id = #{id} or u.id=#{id}
+                and u.userRole = #{id}
             </if>
             <if test="userName!=null and userName!=''">
-                and (u.userName like concat('%',#{userName}, '%') or u.userCode like concat('%',#{userName}, '%'))
+                and u.userName like concat('%',#{userName},'%')
             </if>
         </where>
     </select>

@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @author: QiMu
  * @Date: 2023年02月13日 14:37
  * @Version:1.0
- * @Description:
+ * @Description: 通用返回类
  */
 @Data
 public class BaseResponse<T> implements Serializable {

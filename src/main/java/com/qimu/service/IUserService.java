@@ -2,6 +2,7 @@ package com.qimu.service;
 
 import com.qimu.model.pojo.User;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public interface IUserService {
 
     HashMap<String, Object> findUserAndRole(Integer id, String userName, Integer currentPageNo, Integer pageSize);
 
-    User isLogin(String userCode,String userPassword);
+    User userLogin(String userCode, String userPassword, HttpServletRequest request);
 
     User getUser(User user);
     List<User> findUserRole(Integer id, String userName);

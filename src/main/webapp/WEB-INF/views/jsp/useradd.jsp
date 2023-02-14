@@ -8,8 +8,9 @@
         <span>用户管理页面 >> 用户添加页面</span>
     </div>
     <div class="providerAdd">
-        <form id="userForm" name="userForm" method="post" action="${pageContext.request.contextPath }/user/user.do">
+        <form id="userForm" name="userForm">
             <!--div的class 为error是验证错误，ok是验证成功-->
+            <input type="hidden" name="id" value="" id="id">
             <div>
                 <label for="userCode">用户编码：</label>
                 <input type="text" name="userCode" id="userCode" value="">
@@ -38,12 +39,12 @@
                     <option value="2">女</option>
                 </select>
             </div>
-            <%--                        <div>--%>
-            <%--                            <label for="birthday">出生日期：</label>--%>
-            <%--                            <input type="text" Class="Wdate" id="birthday" name="birthday"--%>
-            <%--                                   readonly="readonly" onclick="WdatePicker();">--%>
-            <%--                            <font color="red"></font>--%>
-            <%--                        </div>--%>
+            <div>
+                <label for="birthday">出生日期：</label>
+                <input type="text" Class="Wdate" id="birthday" name="birthday"
+                       readonly="readonly" onclick="WdatePicker();">
+                <font color="red"></font>
+            </div>
             <div>
                 <label for="phone">用户电话：</label>
                 <input type="text" name="phone" id="phone" value="">
@@ -69,4 +70,4 @@
 </div>
 </section>
 <%@include file="../jsp/common/foot.jsp" %>
-<script type="text/javascript" src="${pageContext.request.contextPath }/static/js/useradd.js"></script>
+<script type="module" src="${pageContext.request.contextPath }/static/js/useradd.js"></script>

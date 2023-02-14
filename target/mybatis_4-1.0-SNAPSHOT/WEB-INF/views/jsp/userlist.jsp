@@ -7,37 +7,35 @@
         <span>用户管理页面</span>
     </div>
     <div class="search">
-        <form method="get" action="${pageContext.request.contextPath }/user/users.do">
-            <input name="method" value="query" class="input-text" type="hidden">
+        <form class="search">
             <span>用户名：</span>
-            <input name="queryname" class="input-text" type="text" value="${queryname }">
+            <input name="userName" id="userName" class="input-text" type="text" value="${userName}">
             <span>用户角色：</span>
-            <select name="queryUserRole">
+            <select name="userRole" id="userRole">
                 <c:if test="${roleList != null }">
-                    <c:if test="${queryUserRole !=0}">
+                    <c:if test="${userRole !=0}">
                         <option value="0">--请选择--</option>
                         <c:forEach var="role" items="${roleList}">
                             <option
-                                    <c:if test="${role.id == queryUserRole }">selected="selected"</c:if>
+                                    <c:if test="${role.id == userRole }">selected="selected"</c:if>
                                     value="${role.id}">${role.roleName}</option>
                         </c:forEach>
                     </c:if>
-                    <c:if test="${queryUserRole ==0}">
-                        <c:if test="${queryUserRole ==0}">
+                    <c:if test="${userRole ==0}">
+                        <c:if test="${userRole ==0}">
                             <option value="0">--请选择--</option>
                         </c:if>
                         <c:forEach var="role" items="${roleList}">
                             <option
-                                    <c:if test="${role.id == queryUserRole }">selected="selected"</c:if>
+                                    <c:if test="${role.id == userRole }">selected="selected"</c:if>
                                     value="${role.id}">${role.roleName}</option>
                         </c:forEach>
-                        <c:if test="${queryUserRole !=0}">
+                        <c:if test="${userRole !=0}">
                             <option value="0">--请选择--</option>
                         </c:if>
                     </c:if>
                 </c:if>
             </select>
-
             <input type="hidden" name="pageIndex" value="1"/>
             <input value="查 询" type="submit" id="searchbutton">
             <a href="${pageContext.request.contextPath}/user/useradd">添加用户</a>
@@ -69,8 +67,11 @@
 							</span>
                 </td>
                 <td>
-                    <span>${user.birthday}</span>
+                    <span>${user.age}</span>
                 </td>
+<%--                <td>--%>
+<%--                    <span>${user.address}</span>--%>
+<%--                </td>--%>
                 <td>
                     <span>${user.phone}</span>
                 </td>
@@ -85,7 +86,7 @@
                              username="${user.userName}"><img
                             src="${pageContext.request.contextPath }/static/images/xiugai.png" alt="修改" title="修改"/></a></span>
                     <span><span class="deleteUser" userid="${user.id }"
-                             username="${user.userName }"><img
+                                username="${user.userName }"><img
                             src="${pageContext.request.contextPath }/static/images/schu.png" alt="删除"
                             title="删除"/></span></span>
                 </td>
