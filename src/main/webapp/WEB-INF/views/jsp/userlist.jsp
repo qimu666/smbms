@@ -11,7 +11,9 @@
             <span>用户名：</span>
             <input name="userName" id="userName" class="input-text" type="text" value="${userName}">
             <span>用户角色：</span>
+            <input type="hidden" value="${userRole}" id="rid"/>
             <select name="userRole" id="userRole">
+
                 <c:if test="${roleList != null }">
                     <c:if test="${userRole !=0}">
                         <option value="0">--请选择--</option>
@@ -44,6 +46,7 @@
     <!--用户-->
     <table class="providerTable" cellpadding="0" cellspacing="0">
         <tr class="firstTr">
+            <th width="10%">用户id</th>
             <th width="10%">用户编码</th>
             <th width="20%">用户名称</th>
             <th width="10%">性别</th>
@@ -54,6 +57,9 @@
         </tr>
         <c:forEach var="user" items="${userList}" varStatus="status">
             <tr>
+                <td>
+                    <span>${user.id }</span>
+                </td>
                 <td>
                     <span>${user.userCode }</span>
                 </td>
@@ -69,9 +75,6 @@
                 <td>
                     <span>${user.age}</span>
                 </td>
-<%--                <td>--%>
-<%--                    <span>${user.address}</span>--%>
-<%--                </td>--%>
                 <td>
                     <span>${user.phone}</span>
                 </td>
@@ -79,12 +82,12 @@
                     <span>${user.role.roleName}</span>
                 </td>
                 <td>
-                    <span><a class="viewUser" href="javascript:;" userid="${user.id}" username="${user.userName}"><img
+                    <span><span class="viewUser" href="javascript:;" userid="${user.id}" username="${user.userName}"><img
                             src="${pageContext.request.contextPath }/static/images/read.png" alt="查看"
-                            title="查看"/></a></span>
-                    <span><a class="modifyUser" href="javascript:;" userid="${user.id }"
+                            title="查看"/></span></span>
+                    <span><span class="modifyUser" href="javascript:;" userid="${user.id }"
                              username="${user.userName}"><img
-                            src="${pageContext.request.contextPath }/static/images/xiugai.png" alt="修改" title="修改"/></a></span>
+                            src="${pageContext.request.contextPath }/static/images/xiugai.png" alt="修改" title="修改"/></span></span>
                     <span><span class="deleteUser" userid="${user.id }"
                                 username="${user.userName }"><img
                             src="${pageContext.request.contextPath }/static/images/schu.png" alt="删除"
@@ -116,4 +119,4 @@
 </div>
 
 <%@include file="common/foot.jsp" %>
-<script type="text/javascript" src="${pageContext.request.contextPath }/static/js/userlist.js"></script>
+<script type="module" src="${pageContext.request.contextPath }/static/js/userlist.js"></script>

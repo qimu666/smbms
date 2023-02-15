@@ -7,7 +7,6 @@ import com.qimu.constant.UserConstant;
 import com.qimu.exception.BusinessException;
 import com.qimu.model.pojo.Role;
 import com.qimu.model.pojo.User;
-import com.qimu.model.request.PageRequest;
 import com.qimu.service.IUserService;
 import com.qimu.service.RoleService;
 import org.apache.commons.lang3.StringUtils;
@@ -40,12 +39,12 @@ public class IUserController {
      */
     @PostMapping("/login.do")
     @ResponseBody
-    public BaseResponse<String> login(@RequestBody User user, HttpServletRequest request) {
+    public BaseResponse<User> login(@RequestBody User user, HttpServletRequest request) {
         User u = iUserService.userLogin(user.getUserCode(), user.getUserPassword(), request);
         if (u == null) {
             throw new BusinessException(ErrorCode.RESULT_ERROR, "账号密码有误！");
         }
-        return ResultUtil.success(ErrorCode.SUCCESS);
+        return ResultUtil.success(ErrorCode.SUCCESS, u);
     }
 
     // 用户管理页面数据及分页
@@ -120,18 +119,13 @@ public class IUserController {
      * @return
      */
     @GetMapping("/userView/{uid}")
-    public String userView(@PathVariable("uid") Integer id, Model model) throws ParseException {
-        User user = new User();
-        user.setId(id);
-        List<User> users = iUserService.findUserRole(user.getId(), null);
-        if (!users.isEmpty()) {
-            Date birthday = users.get(0).getBirthday();
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            String format = simpleDateFormat.format(birthday);
-            model.addAttribute("user", users.get(0));
-            model.addAttribute("birthday", format);
+    @ResponseBody
+    public BaseResponse<User> userView(@PathVariable("uid") Integer id){
+        User user = iUserService.getById(id);
+        if (user != null) {
+            return ResultUtil.success(user, ErrorCode.SUCCESS);
         }
-        return "userview";
+        return ResultUtil.error(ErrorCode.REQUEST_NULL_ERROR, "用户不存在");
     }
 
     /**
@@ -195,5 +189,18 @@ public class IUserController {
     public String logOut(HttpServletRequest request) {
         request.getSession().removeAttribute(UserConstant.USER_LOGIN_STATUS);
         return "../login";
+    }
+
+    @GetMapping("/current")
+    @ResponseBody
+    public BaseResponse<User> getCurrentUser(HttpServletRequest request) {
+        Object objUser = request.getSession().getAttribute(UserConstant.USER_LOGIN_STATUS);
+        User currentUser = (User) objUser;
+        if (currentUser == null) {
+            throw new BusinessException(ErrorCode.NOT_LOGIN);
+        }
+        Integer userId = currentUser.getId();
+        User user = iUserService.getById(userId);
+        return ResultUtil.success(user, ErrorCode.SUCCESS);
     }
 }

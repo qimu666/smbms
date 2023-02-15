@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 
@@ -70,7 +71,9 @@ public class IUserServiceImpl implements IUserService {
         if (user == null) {
             throw new BusinessException(ErrorCode.REQUEST_NULL_ERROR, "用户名或密码有误 (>_<) !!! ");
         }
-        request.getSession().setAttribute(UserConstant.USER_LOGIN_STATUS, user);
+        HttpSession session = request.getSession();
+        session.setAttribute(UserConstant.USER_LOGIN_STATUS, user);
+        session.setMaxInactiveInterval(86400);
         return user;
     }
 
@@ -81,6 +84,11 @@ public class IUserServiceImpl implements IUserService {
 
     public List<User> findUserRole(Integer id, String userName) {
         return iUserMapper.findUserAndRole(id, userName);
+    }
+
+    @Override
+    public User getById(Integer userId) {
+        return iUserMapper.getById(userId);
     }
 
 }

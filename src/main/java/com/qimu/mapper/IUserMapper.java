@@ -55,4 +55,6 @@ public interface IUserMapper {
     List<User> findUserAndRole(@Param("id") Integer id,@Param("userName") String userName);
 
     User getUser(User user);
+
+    User getById(Integer userId);
 }

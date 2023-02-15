@@ -8,6 +8,6 @@
 </head>
 <body>
 你要访问的页面，已经飞往火星！
-<a href="javascript:window.history.back(-1);">返回</a>
+<a href="/login">返回</a>
 </body>
 </html>

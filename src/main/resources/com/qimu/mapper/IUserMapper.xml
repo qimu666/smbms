@@ -258,4 +258,9 @@
         from smbms_user
         where userCode = #{userCode}
     </select>
+    <select id="getById" resultType="com.qimu.model.pojo.User">
+        select *
+        from smbms_user
+        where id = #{id}
+    </select>
 </mapper>

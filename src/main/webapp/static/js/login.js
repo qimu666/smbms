@@ -1,4 +1,4 @@
-import {login} from "./common/common.js";
+import {login} from "../services/user_api.js";
 $("#login").on("click", function () {
     login()
     return false

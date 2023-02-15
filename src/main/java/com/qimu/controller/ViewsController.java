@@ -2,7 +2,7 @@ package com.qimu.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+
 
 /**
  * @author: QiMu
@@ -11,10 +11,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @Description:
  */
 @Controller
-@RequestMapping("/page")
 public class ViewsController {
-    @GetMapping("/list")
+    @GetMapping("/error")
     public String userList() {
-        return "userlist";
+        return "../error";
+    }
+
+
+    @GetMapping("/login")
+    public String logOut() {
+        return "../login";
+    }
+
+    @GetMapping("/userView")
+    public String userView() {
+        return "userview";
+    }
+
+    @GetMapping("/update")
+    public String update() {
+        return "usermodify";
     }
 }

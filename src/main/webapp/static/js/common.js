@@ -12,7 +12,6 @@ var imgNo = "<img width='15px' src=" + path + "'/static/images/n.png' />";
 function validateTip(element, css, tipString, status) {
     element.css(css);
     element.html(tipString);
-
     element.prev().attr("validateStatus", status);
 }
 

@@ -1,4 +1,4 @@
-import {save} from "./common/common.js";
+import {roleList, save} from "../services/user_api.js";
 
 var userName = null;
 var birthday = null;
@@ -13,7 +13,6 @@ $(function () {
     userName = $("#userName");
     birthday = $("#birthday");
     phone = $("#phone");
-    userRole = $("#userRole");
     gender = $("#gender").val()
     saveBtn = $("#save");
     backBtn = $("#back");
@@ -21,36 +20,12 @@ $(function () {
     userName.next().html("*");
     birthday.next().html("*");
     phone.next().html("*");
+    userRole = $("#userRole");
     userRole.next().html("*");
 
-    $.ajax({
-        type: "GET",//请求类型
-        url: path + "/user/user_role_list",//请求的url
-        dataType: "json",//ajax接口（请求url）返回的数据类型
-        success: function (data) {//data：返回数据（json对象）
-            if (data != null) {
-                var rid = $("#rid").val();
-                userRole.html("");
-                var options = "<option value=\"0\">请选择</option>";
-                data = data.data
-                console.log(data)
-                for (var i = 0; i < data.length; i++) {
-                    //alert(data[i].id);
-                    //alert(data[i].roleName);
-                    if (rid != null && rid != undefined && data[i].id == rid) {
-                        options += "<option selected=\"selected\" value=\"" + data[i].id + "\" >" + data[i].roleName + "</option>";
-                    } else {
-                        options += "<option value=\"" + data[i].id + "\" >" + data[i].roleName + "</option>";
-                    }
-                }
-                userRole.html(options);
-            }
-        },
-        error: function (data) {//当访问时候，404，500 等非200的错误状态码
-            validateTip(userRole.next(), {"color": "red"}, imgNo + " 获取用户角色列表error", false);
-        }
-    });
 
+
+    roleList()
 
     userName.on("focus", function () {
         validateTip(userName.next(), {"color": "#666666"}, "* 用户名长度必须是大于1小于10的字符", false);
@@ -106,7 +81,6 @@ $(function () {
             // && birthday.attr("validateStatus") == "true"
             && userRole.attr("validateStatus") == "true"
         ) {
-
             // 发送请求
             save()
         }

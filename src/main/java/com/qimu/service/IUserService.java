@@ -23,4 +23,6 @@ public interface IUserService {
 
     User getUser(User user);
     List<User> findUserRole(Integer id, String userName);
+
+    User getById(Integer userId);
 }

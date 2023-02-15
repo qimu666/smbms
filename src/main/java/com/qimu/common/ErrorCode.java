@@ -34,10 +34,16 @@ public enum ErrorCode {
     /**
      * 用户存在
      */
-    USER_EXITS(40003,"用户已存在","");
+    USER_EXITS(40003, "用户已存在", ""),
+    /**
+     * 未登录
+     */
+    NOT_LOGIN(40100, "未登录", ""),
+    ;
     /**
      * 错误码
      */
+
     private final int code;
     /**
      * 错误描述

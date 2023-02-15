@@ -1,4 +1,4 @@
-import {save} from "./common/common.js";
+import {getUserCode, roleList, save} from "../services/user_api.js";
 
 var userCode = null;
 var userName = null;
@@ -35,25 +35,7 @@ $(function () {
     birthday.next().html("*");
     userRole.next().html("*");
 
-    $.ajax({
-        type: "GET",//请求类型
-        url: path + "/user/user_role_list",//请求的url
-        dataType: "json",//ajax接口（请求url）返回的数据类型
-        success: function (data) {//data：返回数据（json对象）
-            if (data && data.code === 0) {
-                userRole.html("");
-                var options = "<option value=\"0\">请选择</option>";
-                for (var i = 0; i < data.data.length; i++) {
-                    options += "<option value=\"" + data.data[i].id + "\">" + data.data[i].roleName + "</option>";
-                }
-                userRole.html(options);
-            }
-        },
-        error: function (data) {//当访问时候，404，500 等非200的错误状态码
-            validateTip(userRole.next(), {"color": "red"}, imgNo + " 获取用户角色列表error", false);
-        }
-    });
-
+    roleList()
 
     /*
      * 验证
@@ -63,27 +45,7 @@ $(function () {
     userCode.bind("blur", function () {
         //ajax后台验证--userCode是否已存在
         //user.do?method=ucexist&userCode=**
-        $.ajax({
-            type: "GET",//请求类型
-            url: path + "/user/user_code",//请求的url
-            data: {userCode: userCode.val()},//请求参数
-            dataType: "json",//ajax接口（请求url）返回的数据类型
-            success: function (data) {//data：返回数据（json对象）
-                if (data.code === 0) {
-                    validateTip(userCode.next(), {"color": "green"}, imgYes + "该账号可以注册", true);
-                }
-                if (data.code === 40102) {//账号已存在，错误提示
-                    validateTip(userCode.next(), {"color": "red"}, imgNo + "用户名已在,不可以注册", false);
-                }
-                if (data.code === 40000) {//
-                    validateTip(userCode.next(), {"color": "red"}, imgNo + "用户编码为空", false);
-                }
-            },
-            error: function (data) {//当访问时候，404，500 等非200的错误状态码
-                validateTip(userCode.next(), {"color": "red"}, imgNo + " 您访问的页面不存在", false);
-            }
-        });
-
+        getUserCode(userCode)
 
     }).bind("focus", function () {
         //显示友情提示
