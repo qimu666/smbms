@@ -21,8 +21,18 @@ public class TestUser {
 
     */
 /**
-     * 查询所有用户信息
-     *//*
+ * 查询所有用户信息
+ * <p>
+ * 动态获取用户
+ * <p>
+ * 动态添加用户
+ * <p>
+ * 按Id动态更新用户
+ * <p>
+ * 按Id动态删除用户
+ * <p>
+ * 查找用户和角色
+ *//*
 
     @Test
     public void selectAll() {
@@ -32,8 +42,8 @@ public class TestUser {
 
     */
 /**
-     * 动态获取用户
-     *//*
+ * 动态获取用户
+ *//*
 
     @Test
     public void dynamicGetUser() {
@@ -46,8 +56,8 @@ public class TestUser {
 
     */
 /**
-     * 动态添加用户
-     *//*
+ * 动态添加用户
+ *//*
 
     @Test
     public void dynamicAddUser() {
@@ -61,8 +71,8 @@ public class TestUser {
 
     */
 /**
-     * 按Id动态更新用户
-     *//*
+ * 按Id动态更新用户
+ *//*
 
     @Test
     public void dynamicUpdateUserById() {
@@ -75,8 +85,8 @@ public class TestUser {
 
     */
 /**
-     * 按Id动态删除用户
-     *//*
+ * 按Id动态删除用户
+ *//*
 
     @Test
     public void dynamicDeleteUserById() {
@@ -87,8 +97,8 @@ public class TestUser {
 
     */
 /**
-     * 查找用户和角色
-     *//*
+ * 查找用户和角色
+ *//*
 
     @Test
     public void findUserAndRole() {

@@ -82,12 +82,14 @@
                     <span>${user.role.roleName}</span>
                 </td>
                 <td>
-                    <span><span class="viewUser" href="javascript:;" userid="${user.id}" username="${user.userName}"><img
+                    <span><span class="viewUser" href="javascript:;" userid="${user.id}"
+                                username="${user.userName}"><img
                             src="${pageContext.request.contextPath }/static/images/read.png" alt="查看"
                             title="查看"/></span></span>
                     <span><span class="modifyUser" href="javascript:;" userid="${user.id }"
-                             username="${user.userName}"><img
-                            src="${pageContext.request.contextPath }/static/images/xiugai.png" alt="修改" title="修改"/></span></span>
+                                username="${user.userName}"><img
+                            src="${pageContext.request.contextPath }/static/images/xiugai.png" alt="修改"
+                            title="修改"/></span></span>
                     <span><span class="deleteUser" userid="${user.id }"
                                 username="${user.userName }"><img
                             src="${pageContext.request.contextPath }/static/images/schu.png" alt="删除"

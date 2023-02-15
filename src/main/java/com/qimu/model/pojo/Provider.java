@@ -18,24 +18,6 @@ public class Provider {
 
     private Bill bills;
 
-    @Override
-    public String toString() {
-        return "Provider{" +
-                "id=" + id +
-                ", proCode='" + proCode + '\'' +
-                ", proName='" + proName + '\'' +
-                ", bills=" + bills +
-                '}';
-    }
-
-    public Bill getBills() {
-        return bills;
-    }
-
-    public void setBills(Bill bills) {
-        this.bills = bills;
-    }
-
     public Provider() {
     }
 
@@ -52,6 +34,24 @@ public class Provider {
         this.creationDate = creationDate;
         this.modifyDate = modifyDate;
         this.modifyBy = modifyBy;
+    }
+
+    @Override
+    public String toString() {
+        return "Provider{" +
+                "id=" + id +
+                ", proCode='" + proCode + '\'' +
+                ", proName='" + proName + '\'' +
+                ", bills=" + bills +
+                '}';
+    }
+
+    public Bill getBills() {
+        return bills;
+    }
+
+    public void setBills(Bill bills) {
+        this.bills = bills;
     }
 
     public Integer getId() {

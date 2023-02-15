@@ -23,7 +23,7 @@ public class BillServiceImpl implements BillService {
         return billMapper.dynamicAddBill(bill);
     }
 
-    public Integer dynamicUpdateBillById(Bill bill){
+    public Integer dynamicUpdateBillById(Bill bill) {
         return billMapper.dynamicUpdateBillById(bill);
     }
 

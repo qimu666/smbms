@@ -28,6 +28,41 @@ public class User {
 
     private Integer age;
 
+    public User() {
+    }
+
+    public User(UserRequest userRequest, Date birthday) {
+        this.id = userRequest.getId();
+        this.userCode = userRequest.getUserCode();
+        this.userName = userRequest.getUserName();
+        this.userPassword = userRequest.getUserPassword();
+        this.gender = userRequest.getGender();
+        this.birthday = birthday;
+        this.phone = userRequest.getPhone();
+        this.address = userRequest.getAddress();
+        this.userRole = userRequest.getUserRole();
+        this.createdBy = userRequest.getCreatedBy();
+        this.modifyBy = userRequest.getModifyBy();
+        this.role = userRequest.getRole();
+    }
+
+    public User(Integer id, String userCode, String userName, String userPassword, Integer gender, Date birthday, String phone, String address, Integer userRole, Integer createdBy, Date creationDate, Integer modifyBy, Date modifyDate, Role role) {
+        this.id = id;
+        this.userCode = userCode;
+        this.userName = userName;
+        this.userPassword = userPassword;
+        this.gender = gender;
+        this.birthday = birthday;
+        this.phone = phone;
+        this.address = address;
+        this.userRole = userRole;
+        this.createdBy = createdBy;
+        this.creationDate = creationDate;
+        this.modifyBy = modifyBy;
+        this.modifyDate = modifyDate;
+        this.role = role;
+    }
+
     public Integer getAge() {
         if (birthday != null) {
             Date date = new Date();
@@ -62,41 +97,6 @@ public class User {
     }
 
     public void setRole(Role role) {
-        this.role = role;
-    }
-
-    public User() {
-    }
-
-    public User(UserRequest userRequest, Date birthday) {
-        this.id = userRequest.getId();
-        this.userCode = userRequest.getUserCode();
-        this.userName = userRequest.getUserName();
-        this.userPassword = userRequest.getUserPassword();
-        this.gender = userRequest.getGender();
-        this.birthday = birthday;
-        this.phone = userRequest.getPhone();
-        this.address = userRequest.getAddress();
-        this.userRole = userRequest.getUserRole();
-        this.createdBy = userRequest.getCreatedBy();
-        this.modifyBy = userRequest.getModifyBy();
-        this.role = userRequest.getRole();
-    }
-
-    public User(Integer id, String userCode, String userName, String userPassword, Integer gender, Date birthday, String phone, String address, Integer userRole, Integer createdBy, Date creationDate, Integer modifyBy, Date modifyDate, Role role) {
-        this.id = id;
-        this.userCode = userCode;
-        this.userName = userName;
-        this.userPassword = userPassword;
-        this.gender = gender;
-        this.birthday = birthday;
-        this.phone = phone;
-        this.address = address;
-        this.userRole = userRole;
-        this.createdBy = createdBy;
-        this.creationDate = creationDate;
-        this.modifyBy = modifyBy;
-        this.modifyDate = modifyDate;
         this.role = role;
     }
 
@@ -193,15 +193,15 @@ public class User {
         return modifyDate;
     }
 
+    public void setModifyDate(Date modifyDate) {
+        this.modifyDate = modifyDate;
+    }
+
     public Date getCreationDate() {
         return creationDate;
     }
 
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
-    }
-
-    public void setModifyDate(Date modifyDate) {
-        this.modifyDate = modifyDate;
     }
 }

@@ -99,8 +99,6 @@ public class IUserController {
 }
 ```
 
-
-
 ## 1. 添加依赖
 
 ```xml
@@ -302,9 +300,9 @@ public class IUserController {
 
 ### 2.2  配置SprignMVC-config
 
->1. Controller包的扫描 
->2. 静态资源处理 
->3.  视图控制器
+> 1. Controller包的扫描
+>2. 静态资源处理
+>3. 视图控制器
 >4. 注解驱动
 
 ```xml
@@ -335,21 +333,21 @@ public class IUserController {
 
 ### 2.3 Spring整合Mybatis和MVC的配置文件
 
->**配置分为三大部分：**
+> **配置分为三大部分：**
 >
-> **一： 1. 包扫描、排除@Controller** 
+> **一： 1. 包扫描、排除@Controller**
 >
->**二：事务相关** 
+>**二：事务相关**
 >
->1. **事务管理器** 
->2.  **事务注解驱动**
+>1. **事务管理器**
+>2. **事务注解驱动**
 >
->**三：MyBaits需要的配置：** 
+>**三：MyBaits需要的配置：**
 >
->1. **引入 jdbc.properties** 
->2.  **druid 数据源** 
->3.  **SqlSessionFactoryBean 注册到IOC**
->4.  **产生的mapper代理类注册到IOC  ----> (配置 MapperScannerConfigurer)**
+>1. **引入 jdbc.properties**
+>2. **druid 数据源**
+>3. **SqlSessionFactoryBean 注册到IOC**
+>4. **产生的mapper代理类注册到IOC ----> (配置 MapperScannerConfigurer)**
 
 ```properties
 jdbc.driver=com.mysql.cj.jdbc.Driver
@@ -442,7 +440,7 @@ jdbc.password=1234
 
 ### 3.1 log4j日志文件(druid/mybatis)
 
->在 resources/ 下编写 log4j.xml
+> 在 resources/ 下编写 log4j.xml
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -474,7 +472,7 @@ jdbc.password=1234
 
 ### 3.2 lockback 日志(Spring/mybatis)
 
->在 main/resources/ 下编写 logback.xml（固定名字）
+> 在 main/resources/ 下编写 logback.xml（固定名字）
 >
 > 在 test/resources/ 下编写 logback-test.xml（固定名字，单元测试会用）
 

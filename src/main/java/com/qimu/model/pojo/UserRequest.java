@@ -1,6 +1,7 @@
 package com.qimu.model.pojo;
 
 import lombok.Data;
+
 import java.io.Serializable;
 
 /**

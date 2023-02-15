@@ -1,7 +1,6 @@
 package com.qimu.exception;
 
 import com.qimu.common.ErrorCode;
-import lombok.Data;
 
 /**
  * @author: QiMu

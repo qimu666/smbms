@@ -53,7 +53,7 @@ public class IUserController {
         // todo 修改用户角色查询
         Role role = new Role();
         List<Role> allRole = roleService.getAllRole(role);
-        Integer pageSize = 8;
+        Integer pageSize = 10;
         HashMap<String, Object> map = iUserService.findUserAndRole(userRole, userName, pageIndex, pageSize);
         model.addAttribute("roleList", allRole);
         List<User> userList = (List<User>) map.get("userList");
@@ -120,7 +120,7 @@ public class IUserController {
      */
     @GetMapping("/userView/{uid}")
     @ResponseBody
-    public BaseResponse<User> userView(@PathVariable("uid") Integer id){
+    public BaseResponse<User> userView(@PathVariable("uid") Integer id) {
         User user = iUserService.getById(id);
         if (user != null) {
             return ResultUtil.success(user, ErrorCode.SUCCESS);

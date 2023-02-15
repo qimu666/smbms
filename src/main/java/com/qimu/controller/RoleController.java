@@ -12,18 +12,19 @@ public class RoleController {
     @Autowired
     private RoleService roleService;
 
-    public List<Role> getAllRole(Role role){
+    public List<Role> getAllRole(Role role) {
         return roleService.getAllRole(role);
     }
 
-    public Integer dynamicAddRole(Role role){
+    public Integer dynamicAddRole(Role role) {
         return roleService.dynamicAddRole(role);
     }
 
     public Integer dynamicUpdateRoleById(Role role) {
         return roleService.dynamicUpdateRoleById(role);
     }
-    public Integer dynamicDeleteRoleById(Integer[] id){
-       return roleService.dynamicDeleteRoleById(id);
+
+    public Integer dynamicDeleteRoleById(Integer[] id) {
+        return roleService.dynamicDeleteRoleById(id);
     }
 }

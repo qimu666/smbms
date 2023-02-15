@@ -1,4 +1,4 @@
-import {roleList, userDelete, userView} from "../services/user_api.js";
+import {roleList, userDelete} from "../services/user_api.js";
 import {localhost} from "../config/config.js";
 
 var userObj;

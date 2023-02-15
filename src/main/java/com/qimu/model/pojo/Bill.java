@@ -17,14 +17,6 @@ public class Bill {
     private Timestamp modifyDate;
     private Integer providerId;
 
-    @Override
-    public String toString() {
-        return "Bill{" + "providerId=" + providerId + '\'' +
-                "billCode='" + billCode + '\'' +
-                ", productName='" + productName + '\'' +
-                '}';
-    }
-
     public Bill() {
     }
 
@@ -42,6 +34,14 @@ public class Bill {
         this.modifyBy = modifyBy;
         this.modifyDate = modifyDate;
         this.providerId = providerId;
+    }
+
+    @Override
+    public String toString() {
+        return "Bill{" + "providerId=" + providerId + '\'' +
+                "billCode='" + billCode + '\'' +
+                ", productName='" + productName + '\'' +
+                '}';
     }
 
     public Integer getId() {

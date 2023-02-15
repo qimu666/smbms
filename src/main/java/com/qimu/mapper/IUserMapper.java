@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IUserMapper {
 
-    User isLogin(@Param("userCode") String userCode,@Param("userPassword")String userPassword);
+    User isLogin(@Param("userCode") String userCode, @Param("userPassword") String userPassword);
     /**
      * 查询所有用户信息
      *
@@ -52,7 +52,7 @@ public interface IUserMapper {
      *
      * @return
      */
-    List<User> findUserAndRole(@Param("id") Integer id,@Param("userName") String userName);
+    List<User> findUserAndRole(@Param("id") Integer id, @Param("userName") String userName);
 
     User getUser(User user);
 

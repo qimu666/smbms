@@ -11,15 +11,6 @@ public class Role {
     private Integer modifyBy;
     private Timestamp modifyDate;
 
-    @Override
-    public String toString() {
-        return "Role{" +
-                "id=" + id +
-                ", roleCode='" + roleCode + '\'' +
-                ", roleName='" + roleName + '\'' +
-                '}';
-    }
-
     public Role() {
     }
 
@@ -31,6 +22,15 @@ public class Role {
         this.creationDate = creationDate;
         this.modifyBy = modifyBy;
         this.modifyDate = modifyDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Role{" +
+                "id=" + id +
+                ", roleCode='" + roleCode + '\'' +
+                ", roleName='" + roleName + '\'' +
+                '}';
     }
 
     public Integer getId() {

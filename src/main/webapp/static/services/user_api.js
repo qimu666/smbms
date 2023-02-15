@@ -107,12 +107,12 @@ export function roleList() {
             rid = ridDealWith(rid)
             if (rid !== null) {
                 if (rid !== 0) {
-                    options = forRole(data,rid, options)
+                    options = forRole(data, rid, options)
                     options += "<option value=\"0\">-- 请选择 --</option>";
                 }
                 if (rid === 0) {
                     options = "<option value=\"0\">-- 请选择 --</option>";
-                    options = forRole(data,rid, options)
+                    options = forRole(data, rid, options)
                 }
 
             }
@@ -123,7 +123,7 @@ export function roleList() {
     })
 }
 
-function forRole(data,rid, options) {
+function forRole(data, rid, options) {
     for (let i = 0; i < data.length; i++) {
         options += "<option "
         if (rid === data[i].id) {

@@ -22,6 +22,7 @@ public interface IUserService {
     User userLogin(String userCode, String userPassword, HttpServletRequest request);
 
     User getUser(User user);
+
     List<User> findUserRole(Integer id, String userName);
 
     User getById(Integer userId);

@@ -24,7 +24,6 @@ $(function () {
     userRole.next().html("*");
 
 
-
     roleList()
 
     userName.on("focus", function () {
