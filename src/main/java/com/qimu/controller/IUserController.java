@@ -47,7 +47,15 @@ public class IUserController {
         return ResultUtil.success(ErrorCode.SUCCESS, u);
     }
 
-    // 用户管理页面数据及分页
+    /**
+     * 用户管理页面数据及分页
+     *
+     * @param pageIndex 当前页码
+     * @param userName  用户名1
+     * @param userRole  用户角色
+     * @param model     视图
+     * @return 页面
+     */
     @GetMapping("/search")
     public String query(@RequestParam(defaultValue = "1") Integer pageIndex, String userName, Integer userRole, Model model) {
         // todo 修改用户角色查询
@@ -86,26 +94,36 @@ public class IUserController {
         throw new BusinessException(ErrorCode.OPERATE_ERROR, "删除失败");
     }
 
+    /**
+     * 查询用户编码是否唯一
+     *
+     * @param userCode 用户编码
+     * @return 结果
+     */
     @GetMapping("/user_code")
     @ResponseBody
-    public BaseResponse<String> query(@RequestParam String userCode) {
+    public BaseResponse<String> queryUserCode(@RequestParam String userCode) {
         User user = new User();
         user.setUserCode(userCode);
         User users = iUserService.getUser(user);
         if (StringUtils.isAnyBlank(user.getUserCode())) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "用户编码为空");
+            return ResultUtil.error(ErrorCode.PARAMS_ERROR, "用户编码为空");
         }
         if (users == null) {
-            throw new BusinessException(ErrorCode.SUCCESS, "可以注册该账号");
+            return ResultUtil.success(ErrorCode.SUCCESS, "可以注册该账号");
         }
-        throw new BusinessException(ErrorCode.RESULT_ERROR, "用户名已在，不可以注册");
+        return ResultUtil.error(ErrorCode.RESULT_ERROR, "用户名已在，不可以注册");
     }
 
+    /**
+     * 获取用户角色列表
+     *
+     * @return 所有角色信息
+     */
     @GetMapping("/user_role_list")
     @ResponseBody
     public BaseResponse<List<Role>> userRoleList() {
         List<Role> allRole = roleService.getAllRole(null);
-        // ajax查寻roleName
         if (allRole.isEmpty()) {
             throw new BusinessException(ErrorCode.RESULT_ERROR, "角色不存在");
         }
@@ -115,8 +133,8 @@ public class IUserController {
     /**
      * 查看用户
      *
-     * @param id
-     * @return
+     * @param id 用户id
+     * @return 返回操作结果
      */
     @GetMapping("/userView/{uid}")
     @ResponseBody
@@ -132,8 +150,8 @@ public class IUserController {
      * 修改用户信息
      *
      * @param id    用户id
-     * @param model
-     * @return
+     * @param model 视图
+     * @return 修改用户信息页面
      */
     @GetMapping("/update/{uid}")
     public String toModify(@PathVariable("uid") Integer id, Model model) {
@@ -153,7 +171,7 @@ public class IUserController {
     /**
      * 添加用户界面
      *
-     * @return
+     * @return 跳转到添加用户页面
      */
     @GetMapping("/useradd")
     public String add() {
@@ -163,8 +181,8 @@ public class IUserController {
     /**
      * ajax操作新增用户和修改用户
      *
-     * @param
-     * @return
+     * @param user 前端页面传递的数据
+     * @return 操作后的执行结果
      */
     @PostMapping("/user.do")
     @ResponseBody
@@ -185,12 +203,25 @@ public class IUserController {
         return ResultUtil.success(ErrorCode.OPERATE_ERROR, "操作失败");
     }
 
+    /**
+     * 退出登录 删除session信息
+     *
+     * @param request session
+     * @return
+     */
+
     @GetMapping("/logout.do")
     public String logOut(HttpServletRequest request) {
         request.getSession().removeAttribute(UserConstant.USER_LOGIN_STATUS);
         return "../login";
     }
 
+    /**
+     * 获取当前用户
+     *
+     * @param request session
+     * @return session中是否存在登录的用户信息
+     */
     @GetMapping("/current")
     @ResponseBody
     public BaseResponse<User> getCurrentUser(HttpServletRequest request) {

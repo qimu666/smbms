@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
-<%@include file="/jsp/common/head.jsp" %>
-
+<%@include file="common/head.jsp" %>
 <div class="right">
     <div class="location">
         <strong>你现在所在的位置是:</strong>
@@ -55,5 +54,5 @@
     </div>
 </div>
 </section>
-<%@include file="/jsp/common/foot.jsp" %>
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/providermodify.js"></script>
+<%@include file="common/foot.jsp" %>
+<script type="text/javascript" src="${pageContext.request.contextPath }/static/js/providermodify.js"></script>

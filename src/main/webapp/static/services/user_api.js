@@ -1,4 +1,4 @@
-import userListPath from "../config/config.js"
+import userListPath, {indexPath} from "../config/config.js"
 import {_ajax as ajax, _fetch as fetch, fetchResponse} from "../interceptor/Request.js";
 import {cancleBtn, changeDLGContent} from "../js/userlist.js";
 
@@ -44,7 +44,7 @@ export async function login() {
         .then(res => {
             const {code, description} = res;
             if (code === 0) {
-                location.href = userListPath
+                location.href = indexPath
             } else {
                 alert(description)
             }

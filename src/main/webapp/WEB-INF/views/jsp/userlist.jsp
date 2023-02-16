@@ -119,6 +119,5 @@
         </div>
     </div>
 </div>
-
 <%@include file="common/foot.jsp" %>
 <script type="module" src="${pageContext.request.contextPath }/static/js/userlist.js"></script>

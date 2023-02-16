@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
-<%@include file="../jsp/common/head.jsp" %>
-
+<%@include file="common/head.jsp" %>
 <div class="right">
     <div class="location">
         <strong>你现在所在的位置是:</strong>
@@ -74,18 +73,19 @@
                 </td>
                 <td>
                     <span><a class="viewBill" href="javascript:;" billid=${bill.id } billcc=${bill.billCode }><img
-                            src="${pageContext.request.contextPath }/images/read.png" alt="查看" title="查看"/></a></span>
+                            src="${pageContext.request.contextPath }/static/images/read.png" alt="查看"
+                            title="查看"/></a></span>
                     <span><a class="modifyBill" href="javascript:;" billid=${bill.id } billcc=${bill.billCode }><img
-                            src="${pageContext.request.contextPath }/images/xiugai.png" alt="修改" title="修改"/></a></span>
+                            src="${pageContext.request.contextPath }/static/images/xiugai.png" alt="修改" title="修改"/></a></span>
                     <span><a class="deleteBill" href="javascript:;" billid=${bill.id } billcc=${bill.billCode }><img
-                            src="${pageContext.request.contextPath }/images/schu.png" alt="删除" title="删除"/></a></span>
+                            src="${pageContext.request.contextPath }/static/images/schu.png" alt="删除"
+                            title="删除"/></a></span>
                 </td>
             </tr>
         </c:forEach>
     </table>
 </div>
 </section>
-
 <!--点击删除按钮后弹出的页面-->
 <div class="zhezhao"></div>
 <div class="remove" id="removeBi">
@@ -99,5 +99,5 @@
     </div>
 </div>
 
-<%@include file="/jsp/common/foot.jsp" %>
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/billlist.js"></script>
+<%@include file="common/foot.jsp" %>
+<script type="text/javascript" src="${pageContext.request.contextPath }/static/js/billlist.js"></script>

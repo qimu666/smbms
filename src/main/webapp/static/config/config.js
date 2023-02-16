@@ -1,7 +1,9 @@
-const indexPath = "/user/search"
+const searchPath = "/user/search"
+const index = "/home"
 const prefix = "/user"
-const localhost = "http://localhost:8080"
-const userListPath = localhost + indexPath;
+const localhost = "http://localhost:8088"
+const userListPath = localhost + searchPath;
+const indexPath = localhost + index;
 
-export {indexPath, localhost}
+export {searchPath, localhost, indexPath}
 export default userListPath
