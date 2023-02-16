@@ -114,7 +114,6 @@ export function roleList() {
                     options = "<option value=\"0\">-- 请选择 --</option>";
                     options = forRole(data, rid, options)
                 }
-
             }
             userRole.html(options);
         }

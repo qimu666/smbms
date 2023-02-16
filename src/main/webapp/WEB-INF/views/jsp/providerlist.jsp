@@ -84,4 +84,4 @@
 </div>
 
 <%@include file="common/foot.jsp" %>
-<script type="text/javascript" src="${pageContext.request.contextPath }/static/js/providerlist.js"></script>
+<script type="module" src="${pageContext.request.contextPath }/static/js/providerlist.js"></script>

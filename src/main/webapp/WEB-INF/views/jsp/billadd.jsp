@@ -56,4 +56,4 @@
 </div>
 </section>
 <%@include file="common/foot.jsp" %>
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/billadd.js"></script>
+<script type="module" src="${pageContext.request.contextPath }/js/billadd.js"></script>

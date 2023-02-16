@@ -17,6 +17,16 @@ public class UserViewsController {
         return "../error";
     }
 
+    /**
+     * 添加用户界面
+     *
+     * @return 跳转到添加用户页面
+     */
+    @GetMapping("/useradd")
+    public String add() {
+        return "useradd";
+    }
+
     @GetMapping("/login")
     public String logOut() {
         return "../login";

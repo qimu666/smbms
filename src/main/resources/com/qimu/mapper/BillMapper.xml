@@ -63,6 +63,29 @@
             </if>
         </trim>
     </select>
+
+    <select id="getBillById" resultType="com.qimu.model.pojo.Bill">
+        select *
+        from smbms_bill
+        where id = #{id}
+    </select>
+    <select id="getBillList" resultType="com.qimu.model.pojo.Bill">
+        select *
+        from smbms_bill
+    </select>
+    <select id="getBillsByProviderId" resultType="com.qimu.model.pojo.Bill">
+        select *
+        from smbms_bill
+        <trim prefix="where" suffixOverrides="and">
+            <if test="providerId!=null and providerId!=0">
+                providerId=#{providerId} and
+            </if>
+            <if test="isPayment!=null and isPayment!=0">
+                isPayment=#{isPayment} and
+            </if>
+        </trim>
+    </select>
+
     <!-- Integer dynamicAddBill(Bill bill);-->
     <insert id="dynamicAddBill" useGeneratedKeys="true" keyProperty="id">
         insert into smbms_bill

@@ -8,4 +8,10 @@ let roleEnum = {
     3: "普通用户"
 }
 
-export {genderEnum, roleEnum}
+let isPayment = {
+    0: "请选择",
+    1: "未支付",
+    2: "已支付"
+}
+
+export {genderEnum, roleEnum, isPayment}

@@ -12,35 +12,10 @@
             <input name="userName" id="userName" class="input-text" type="text" value="${userName}">
             <span>用户角色：</span>
             <input type="hidden" value="${userRole}" id="rid"/>
-            <select name="userRole" id="userRole">
-
-                <c:if test="${roleList != null }">
-                    <c:if test="${userRole !=0}">
-                        <option value="0">--请选择--</option>
-                        <c:forEach var="role" items="${roleList}">
-                            <option
-                                    <c:if test="${role.id == userRole }">selected="selected"</c:if>
-                                    value="${role.id}">${role.roleName}</option>
-                        </c:forEach>
-                    </c:if>
-                    <c:if test="${userRole ==0}">
-                        <c:if test="${userRole ==0}">
-                            <option value="0">--请选择--</option>
-                        </c:if>
-                        <c:forEach var="role" items="${roleList}">
-                            <option
-                                    <c:if test="${role.id == userRole }">selected="selected"</c:if>
-                                    value="${role.id}">${role.roleName}</option>
-                        </c:forEach>
-                        <c:if test="${userRole !=0}">
-                            <option value="0">--请选择--</option>
-                        </c:if>
-                    </c:if>
-                </c:if>
-            </select>
+            <select name="userRole" id="userRole"></select>
             <input type="hidden" name="pageIndex" value="1"/>
             <input value="查 询" type="submit" id="searchbutton">
-            <a href="${pageContext.request.contextPath}/user/useradd">添加用户</a>
+            <a href="${pageContext.request.contextPath}/useradd">添加用户</a>
         </form>
     </div>
     <!--用户-->

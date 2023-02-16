@@ -45,4 +45,7 @@ public interface ProviderMapper {
      */
     List<Provider> findBillByProvider();
 
+    Provider getProviderById(Integer id);
+
+    List<Provider> getProviderList();
 }

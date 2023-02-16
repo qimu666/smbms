@@ -215,4 +215,14 @@
                            ON p.id = b.providerId
     </select>
 
+    <select id="getProviderById" resultType="com.qimu.model.pojo.Provider">
+        select *
+        from smbms_provider
+        where id = #{id}
+    </select>
+    <select id="getProviderList" resultType="com.qimu.model.pojo.Provider">
+        select *
+        from smbms_provider
+    </select>
+
 </mapper>

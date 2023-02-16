@@ -27,8 +27,6 @@ $(function () {
     // 角色列表
     roleList()
 
-    //通过jquery的class选择器（数组）
-    //对每个class为viewUser的元素进行动作绑定（click）
     /**
      * bind、live、delegate
      * on

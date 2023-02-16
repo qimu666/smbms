@@ -1,5 +1,5 @@
 import {userView} from "../services/user_api.js";
-import {genderEnum, roleEnum} from "./commonEnum.js";
+import {genderEnum, roleEnum} from "../services/common/commonEnum.js";
 
 var backBtn = null;
 let vid = $("#viewId")

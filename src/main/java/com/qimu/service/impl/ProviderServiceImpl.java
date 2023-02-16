@@ -35,4 +35,13 @@ public class ProviderServiceImpl implements ProviderService {
         return providerMapper.findBillByProvider();
     }
 
+    public Provider getProviderById(Integer id) {
+        return providerMapper.getProviderById(id);
+    }
+
+    @Override
+    public List<Provider> getProviderList() {
+        return providerMapper.getProviderList();
+    }
+
 }

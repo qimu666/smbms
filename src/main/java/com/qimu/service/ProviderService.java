@@ -15,4 +15,6 @@ public interface ProviderService {
 
     List<Provider> findBillByProvider();
 
+    Provider getProviderById(Integer id);
+    List<Provider> getProviderList();
 }

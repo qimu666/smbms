@@ -168,15 +168,6 @@ public class IUserController {
         return "usermodify";
     }
 
-    /**
-     * 添加用户界面
-     *
-     * @return 跳转到添加用户页面
-     */
-    @GetMapping("/useradd")
-    public String add() {
-        return "useradd";
-    }
 
     /**
      * ajax操作新增用户和修改用户

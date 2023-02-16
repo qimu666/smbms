@@ -30,7 +30,7 @@
         <h2 class="leftH2"><span class="span1"></span>功能列表 <span></span></h2>
         <nav>
             <ul class="list">
-                <li><a href="${pageContext.request.contextPath }/bill">订单管理</a></li>
+                <li><a href="${pageContext.request.contextPath }/bill/users_list">订单管理</a></li>
                 <li><a href="${pageContext.request.contextPath }/provider">供应商管理</a></li>
                 <li><a href="${pageContext.request.contextPath }/user/search">用户管理</a></li>
                 <li><a href="${pageContext.request.contextPath }/pwdmodify">密码修改</a></li>

@@ -7,28 +7,19 @@
         <span>订单管理页面</span>
     </div>
     <div class="search">
-        <form method="get" action="${pageContext.request.contextPath }/jsp/bill.do">
-            <input name="method" value="query" class="input-text" type="hidden">
+        <form id="billSearch">
             <span>商品名称：</span>
-            <input name="queryProductName" type="text" value="${queryProductName }">
-
+            <input name="productName" type="text" value="${productName }">
+            <input type="hidden" name="pageIndex" value="1"/>
             <span>供应商：</span>
-            <select name="queryProviderId">
-                <c:if test="${providerList != null }">
-                    <option value="0">--请选择--</option>
-                    <c:forEach var="provider" items="${providerList}">
-                        <option
-                                <c:if test="${provider.id == queryProviderId }">selected="selected"</c:if>
-                                value="${provider.id}">${provider.proName}</option>
-                    </c:forEach>
-                </c:if>
-            </select>
-
+            <input type="hidden" value="${providerId}" id="pid"/>
+            <select name="providerId" id="providerId"></select>
+            <input type="hidden" value="${isPayment}"/>
             <span>是否付款：</span>
-            <select name="queryIsPayment">
+            <select name="isPayment" id="isPayment">
                 <option value="0">--请选择--</option>
-                <option value="1" ${queryIsPayment == 1 ? "selected=\"selected\"":"" }>未付款</option>
-                <option value="2" ${queryIsPayment == 2 ? "selected=\"selected\"":"" }>已付款</option>
+                <option value="1" ${isPayment == 1 ? "selected=\"selected\"":"" }>未付款</option>
+                <option value="2" ${isPayment == 2 ? "selected=\"selected\"":"" }>已付款</option>
             </select>
 
             <input value="查 询" type="submit" id="searchbutton">
@@ -84,6 +75,12 @@
             </tr>
         </c:forEach>
     </table>
+    <input type="hidden" id="totalPageCount" value="${totalPageCount}"/>
+    <c:import url="rollpage.jsp">
+        <c:param name="totalCount" value="${totalCount}"/>
+        <c:param name="currentPageNo" value="${currentPageNo}"/>
+        <c:param name="totalPageCount" value="${totalPageCount}"/>
+    </c:import>
 </div>
 </section>
 <!--点击删除按钮后弹出的页面-->
@@ -100,4 +97,4 @@
 </div>
 
 <%@include file="common/foot.jsp" %>
-<script type="text/javascript" src="${pageContext.request.contextPath }/static/js/billlist.js"></script>
+<script type="module" src="${pageContext.request.contextPath }/static/js/billlist.js"></script>

@@ -37,4 +37,10 @@ public interface BillMapper {
      * @return
      */
     Integer dynamicDeleteBillById(@Param("id") Integer[] id);
+
+    Bill getBillById(@Param("id") Integer id);
+
+    List<Bill> getBillList();
+
+    List<Bill> getBillsByProviderId(@Param("isPayment") Integer isPayment,@Param("providerId") Integer providerId);
 }
