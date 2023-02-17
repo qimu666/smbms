@@ -61,10 +61,11 @@
                                 username="${user.userName}"><img
                             src="${pageContext.request.contextPath }/static/images/read.png" alt="查看"
                             title="查看"/></span></span>
-                    <span><span class="modifyUser" href="javascript:;" userid="${user.id }"
-                                username="${user.userName}"><img
-                            src="${pageContext.request.contextPath }/static/images/xiugai.png" alt="修改"
-                            title="修改"/></span></span>
+                    <span>
+                        <span class="modifyUser" userid="${user.id }"
+                              username="${user.userName}"><img
+                                src="${pageContext.request.contextPath }/static/images/xiugai.png" alt="修改"
+                                title="修改"/></span></span>
                     <span><span class="deleteUser" userid="${user.id }"
                                 username="${user.userName }"><img
                             src="${pageContext.request.contextPath }/static/images/schu.png" alt="删除"
@@ -73,15 +74,9 @@
             </tr>
         </c:forEach>
     </table>
-    <input type="hidden" id="totalPageCount" value="${totalPageCount}"/>
-    <c:import url="rollpage.jsp">
-        <c:param name="totalCount" value="${totalCount}"/>
-        <c:param name="currentPageNo" value="${currentPageNo}"/>
-        <c:param name="totalPageCount" value="${totalPageCount}"/>
-    </c:import>
+    <%@include file="paging.jsp" %>
 </div>
 </section>
-
 <!--点击删除按钮后弹出的页面-->
 <div class="zhezhao"></div>
 <div class="remove" id="removeUse">

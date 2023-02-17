@@ -77,11 +77,14 @@
         select *
         from smbms_bill
         <trim prefix="where" suffixOverrides="and">
-            <if test="providerId!=null and providerId!=0">
+            <if test="productName !=null and productName !=''">
+                productName like concat('%',#{productName},'%') and
+            </if>
+            <if test="providerId !=null and providerId !=0">
                 providerId=#{providerId} and
             </if>
-            <if test="isPayment!=null and isPayment!=0">
-                isPayment=#{isPayment} and
+            <if test="isPayment !=null and isPayment !=0">
+                isPayment=#{isPayment}
             </if>
         </trim>
     </select>

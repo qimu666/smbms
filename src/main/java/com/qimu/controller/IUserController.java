@@ -201,6 +201,11 @@ public class IUserController {
      * @return
      */
 
+    // @GetMapping("/logout.do")
+    // public void logOut(HttpServletRequest request) {
+    //     request.getSession().removeAttribute(UserConstant.USER_LOGIN_STATUS);
+    //     throw new BusinessException(ErrorCode.NOT_LOGIN);
+    // }
     @GetMapping("/logout.do")
     public String logOut(HttpServletRequest request) {
         request.getSession().removeAttribute(UserConstant.USER_LOGIN_STATUS);

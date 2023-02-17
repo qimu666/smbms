@@ -1,6 +1,8 @@
 package com.qimu.model.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Timestamp;
 
@@ -15,8 +17,12 @@ public class Bill {
     private Double totalPrice;
     private Integer isPayment;
     private Integer createdBy;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Timestamp creationDate;
     private Integer modifyBy;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Timestamp modifyDate;
     private Integer providerId;
 

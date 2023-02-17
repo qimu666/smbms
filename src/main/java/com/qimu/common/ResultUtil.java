@@ -12,8 +12,8 @@ import java.io.Serializable;
  */
 @Data
 public class ResultUtil implements Serializable {
-    public static <T> BaseResponse<T> success(int code, T data, String message, String description) {
-        return new BaseResponse<>(code, data, message, "");
+    public static <T> BaseResponse<T> success(T data) {
+        return new BaseResponse<>(200, data, "ok", "");
     }
 
     public static <T> BaseResponse<T> success(ErrorCode errorCode, T date) {

@@ -1,7 +1,8 @@
-import {roleList, userDelete} from "../services/user_api.js";
+import {roleList, userDelete} from "../services/api/user_api.js";
 import {localhost} from "../config/config.js";
 
 var userObj;
+
 
 // 用户管理页面上点击删除按钮弹出删除框(userlist.jsp)
 function deleteUser(obj) {
@@ -26,7 +27,6 @@ export function changeDLGContent(contentStr) {
 $(function () {
     // 角色列表
     roleList()
-
     /**
      * bind、live、delegate
      * on
@@ -58,3 +58,6 @@ $(function () {
         openYesOrNoDLG();
     });
 });
+
+
+

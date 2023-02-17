@@ -42,5 +42,5 @@ public interface BillMapper {
 
     List<Bill> getBillList();
 
-    List<Bill> getBillsByProviderId(@Param("isPayment") Integer isPayment,@Param("providerId") Integer providerId);
+    List<Bill> getBillsByProviderId(@Param("productName")String productName,@Param("isPayment") Integer isPayment,@Param("providerId") Integer providerId);
 }

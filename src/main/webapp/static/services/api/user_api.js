@@ -1,6 +1,8 @@
-import userListPath, {indexPath} from "../config/config.js"
-import {_ajax as ajax, _fetch as fetch, fetchResponse} from "../interceptor/Request.js";
-import {cancleBtn, changeDLGContent} from "../js/userlist.js";
+import userListPath, {indexPath} from "../../config/config.js"
+import {_ajax as ajax, _fetch as fetch, ajaxResponse, fetchResponse} from "../interceptor/Request.js";
+import {cancleBtn, changeDLGContent} from "../../js/userlist.js";
+import {get} from "../request/API.js";
+import {genderEnum, roleEnum} from "../common/commonEnum.js";
 
 
 let id = null
@@ -40,7 +42,7 @@ export async function login() {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(data)
-    }).then(fetchResponse)
+    }).then(data=>data.json())
         .then(res => {
             const {code, description} = res;
             if (code === 0) {
@@ -119,7 +121,7 @@ export function roleList() {
         }
     }).fail(function (data) {//当访问时候，404，500 等非200的错误状态码
         validateTip(userRole.next(), {"color": "red"}, imgNo + " 获取用户角色列表error", false);
-    })
+    }).then(ajaxResponse)
 }
 
 function forRole(data, rid, options) {
@@ -147,7 +149,7 @@ function ridDealWith(rid) {
 
 /** 删除用户 **/
 export function userDelete(obj) {
-    $.ajax({
+    ajax({
         type: "DELETE",
         url: `/user/delete_user/` + obj.attr("userid"),
         // data: {"_method":"DELETE"},
@@ -168,11 +170,11 @@ export function userDelete(obj) {
             //alert("对不起，删除失败");
             changeDLGContent("对不起，删除失败");
         }
-    })
+    }).then(ajaxResponse)
 }
 
 export function getUserCode(userCode) {
-    $.ajax({
+    ajax({
         type: "GET",//请求类型
         url: "/user/user_code",//请求的url
         data: {userCode: userCode.val()},//请求参数
@@ -191,18 +193,38 @@ export function getUserCode(userCode) {
         error: function (data) {//当访问时候，404，500 等非200的错误状态码
             validateTip(userCode.next(), {"color": "red"}, imgNo + " 您访问的页面不存在", false);
         }
-    })
+    }).then(ajaxResponse)
 }
 
-export function userView(uid) {
-    $.ajax({
-        type: "GET",
-        url: `/user/userView/${uid}`,
-        dataType: "json",
-        success: function (data) {
-            if (data.code === 0) {
-                document.cookie = "data=" + JSON.stringify(data)
+
+export function userView() {
+    var backBtn = null;
+
+    let urlParams = new URLSearchParams(window.location.search);
+    let uid = urlParams.get('uid');
+
+    get(`/user/userView/${uid}`).then(data => {
+        data = data.data
+        console.log(data)
+        let span = document.querySelector(".providerView")
+        let wid = span.querySelectorAll(".wid")
+        wid[0].innerHTML = data.userCode;
+        wid[1].innerHTML = data.userName;
+        wid[2].innerHTML = genderEnum[data.userRole]
+        wid[3].innerHTML = data.birthday;
+        wid[4].innerHTML = data.phone;
+        wid[5].innerHTML = data.address;
+        wid[6].innerHTML = roleEnum[data.userRole];
+
+        backBtn = $("#back");
+        backBtn.on("click", function () {
+            //alert("view : "+referer);
+            if (referer !== undefined && "" !== referer && "null" !== referer
+                && referer.length > 4) {
+                window.location.href = referer;
+            } else {
+                history.back(-1);
             }
-        }
+        });
     })
 }

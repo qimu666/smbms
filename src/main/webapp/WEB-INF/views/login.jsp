@@ -32,6 +32,7 @@
     </section>
 </section>
 </body>
+<script type="module" src="${pageContext.request.contextPath }/static/js/axios.js"></script>
 <script type="module" src="${pageContext.request.contextPath }/static/js/jquery-1.8.3.min.js"></script>
 <script type="module" src="${pageContext.request.contextPath }/static/js/login.js"></script>
 </html>

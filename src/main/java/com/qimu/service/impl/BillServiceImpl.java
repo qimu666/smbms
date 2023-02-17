@@ -39,16 +39,19 @@ public class BillServiceImpl implements BillService {
     }
 
     @Override
-    public HashMap<String, Object> getBillsList(Integer isPayment, Integer providerId, Integer pageIndex, Integer pageSize) {
+    public HashMap<String, Object> getBillsList(String productName, Integer isPayment, Integer providerId, Integer pageIndex, Integer pageSize) {
         PageHelper.startPage(pageIndex, pageSize);
         // List<Bill> bills = billMapper.getBillList();
-        List<Bill> bills = billMapper.getBillsByProviderId(isPayment, providerId);
+        List<Bill> bills = billMapper.getBillsByProviderId(productName, isPayment, providerId);
         PageInfo<Bill> info = new PageInfo<>(bills);
         HashMap<String, Object> map = new HashMap<>();
         map.put("billList", info.getList());
         map.put("nowPage", info.getPageNum());
-        map.put("pageTotal", info.getPages());
+        map.put("totalPageCount", info.getPages());
         map.put("totalCount", (int) info.getTotal());
+        map.put("isPayment", isPayment);
+        map.put("providerId", providerId);
+        map.put("productName", productName);
         return map;
     }
 
@@ -58,7 +61,7 @@ public class BillServiceImpl implements BillService {
     }
 
     @Override
-    public List<Bill> getBillsByProviderId(Integer isPayment, Integer providerId) {
-        return billMapper.getBillsByProviderId(isPayment, providerId);
+    public List<Bill> getBillsByProviderId(String productName,Integer isPayment, Integer providerId) {
+        return billMapper.getBillsByProviderId(productName,isPayment, providerId);
     }
 }

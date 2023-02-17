@@ -1,4 +1,4 @@
-import {roleList, save} from "../services/user_api.js";
+import {roleList, save} from "../services/api/user_api.js";
 
 var userName = null;
 var birthday = null;

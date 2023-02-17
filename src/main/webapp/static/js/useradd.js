@@ -1,4 +1,4 @@
-import {getUserCode, roleList, save} from "../services/user_api.js";
+import {getUserCode, roleList, save} from "../services/api/user_api.js";
 
 var userCode = null;
 var userName = null;

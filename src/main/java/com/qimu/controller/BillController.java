@@ -1,6 +1,8 @@
 package com.qimu.controller;
 
 
+import com.qimu.common.BaseResponse;
+import com.qimu.common.ResultUtil;
 import com.qimu.model.pojo.Bill;
 import com.qimu.model.pojo.Provider;
 import com.qimu.service.BillService;
@@ -11,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
 import java.util.List;
@@ -26,23 +29,24 @@ public class BillController {
     @Autowired
     private ProviderService providerService;
 
-    @GetMapping("/users_list")
-    public String getBillList(@RequestParam(defaultValue = "1") Integer pageIndex, Integer isPayment, Integer providerId, Model model) {
+    @GetMapping("/bills_list")
+    public String getBillList(@RequestParam(defaultValue = "1") Integer pageIndex, String productName, Integer isPayment, Integer providerId, Model model) {
+        return "billlist";
+    }
+
+    @GetMapping("/bills")
+    @ResponseBody
+    public BaseResponse<HashMap<String, Object>> productName(@RequestParam(defaultValue = "1") Integer pageIndex, String productName, Integer isPayment, Integer providerId) {
         Integer pageSize = 10;
-        System.err.println(providerId);
-        HashMap<String, Object> map = billService.getBillsList(isPayment,providerId, pageIndex, pageSize);
-        List<Bill> billList = (List<Bill>) map.get("billList");
-        for (Bill bill : billList) {
+        HashMap<String, Object> map = billService.getBillsList(productName, isPayment, providerId, pageIndex, pageSize);
+        List<Bill> billLis = (List<Bill>) map.get("billList");
+        for (Bill bill : billLis) {
             Integer provide = bill.getProviderId();
             Provider provider = providerService.getProviderById(provide);
             bill.setProviderName(provider.getProName());
         }
-        model.addAttribute("billList", billList);
-        model.addAttribute("totalCount", map.get("totalCount"));
-        model.addAttribute("totalPageCount", map.get("pageTotal"));
-        model.addAttribute("currentPageNo", map.get("nowPage"));
-        model.addAttribute("isPayment", isPayment);
-        model.addAttribute("providerId", providerId);
-        return "billlist";
+        List<Provider> providerList = providerService.getProviderList();
+        map.put("providerList", providerList);
+        return ResultUtil.success(map);
     }
 }

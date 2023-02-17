@@ -17,10 +17,10 @@ public interface BillService {
 
     Bill getBillById(Integer id);
 
-    HashMap<String, Object> getBillsList(Integer isPayment,Integer providerId, Integer pageIndex, Integer pageSize);
+    HashMap<String, Object> getBillsList(String productName,Integer isPayment,Integer providerId, Integer pageIndex, Integer pageSize);
 
     List<Bill> getBillsList();
 
-    List<Bill> getBillsByProviderId(Integer isPayment,Integer providerId);
+    List<Bill> getBillsByProviderId(String productName,Integer isPayment,Integer providerId);
 
 }
