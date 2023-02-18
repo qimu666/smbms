@@ -1,5 +1,6 @@
 import {roleList, userDelete} from "../services/api/user_api.js";
 import {localhost} from "../config/config.js";
+import {current} from "../services/request/API.js";
 
 var userObj;
 
@@ -25,6 +26,7 @@ export function changeDLGContent(contentStr) {
 }
 
 $(function () {
+    current()
     // 角色列表
     roleList()
     /**

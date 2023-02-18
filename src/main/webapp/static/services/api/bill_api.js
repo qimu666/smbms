@@ -1,6 +1,7 @@
-import {_ajax as ajax} from "../interceptor/Request.js";
-import {get} from "../request/API.js";
+import request from "../request/API.js";
 import {isPaymentEnum} from "../common/commonEnum.js";
+import ridDealWith, {pagIng} from "../common/common.js";
+
 
 const urlParams = new URLSearchParams(window.location.search);
 let pName = urlParams.get('productName');
@@ -19,37 +20,6 @@ let provider = $("#providerId");
 provider.next().html("*");
 
 let rid = $("#pid").val()
-
-/** 角色列表查询 **/
-export function getProviderList() {
-
-    ajax({
-        type: "GET",//请求类型
-        url: "/provider/providers_list",//请求的url
-        dataType: "json",//ajax接口（请求url）返回的数据类型
-    }).done(function (data) {
-        if (data && data.code === 0) {
-            data = data.data
-
-
-        }
-    }).fail(function (data) {//当访问时候，404，500 等非200的错误状态码
-        validateTip(providerId.next(), {"color": "red"}, imgNo + " 获取用户角色列表error", false);
-    })
-}
-
-
-export function ridDealWith(rid) {
-    if (rid === "") {
-        rid = 0
-    } else {
-        rid = parseInt(rid)
-    }
-    if (rid !== rid) {
-        rid = 0;
-    }
-    return rid
-}
 
 function providerList(data, rid, options) {
     if (rid !== 0) {
@@ -75,39 +45,45 @@ function select(data, rid, options) {
     return options
 }
 
-export function getProductName() {
+export function getBills() {
     pName = pName ? pName : ""
-    get('/bill/bills', {
-        productName: pName,
-        isPayment: payID,
-        providerId: providerId,
-        pageIndex: pageIndex ? pageIndex : 1
-    }).then(res => {
-        let data = res.data || {};
-        console.log(data)
-        if (typeof data === 'string') {
-            data = JSON.parse(data);
+    request.get('/bill/bills', {
+        params: {
+            productName: pName,
+            isPayment: payID,
+            providerId: providerId,
+            pageIndex: pageIndex ? pageIndex : 1
         }
-        provider.html("");
-        let options = null;
-        rid = ridDealWith(rid)
-        const prData = data.providerList
-        options = providerList(prData, rid, options)
-        billList(data.billList)
+    }).then(res => {
+            let data = res.data || {};
+            if (typeof data === 'string') {
+                data = JSON.parse(data);
+            }
+            provider.html("");
+            let options = null;
+            rid = ridDealWith(rid)
+            const prData = data.providerList
+            options = providerList(prData, rid, options)
+            billList(data.billList)
 
-        $("#totalPageCount").text(data.totalPageCount)
-        $("#totalCount").text(data.totalCount)
-        $("#currentPageNo").text(data.nowPage)
+            $("#totalPageCount").text(data.totalPageCount)
+            $("#totalCount").text(data.totalCount)
+            $("#currentPageNo").text(data.nowPage)
+            let pageCount = $("#pageCount").val(data.totalPageCount)
+            let newPageNo = $("#newPageNo").val(data.nowPage)
+            $("#totalCounts").val(data.totalCount)
+            pageCount = ridDealWith(pageCount.val())
+            newPageNo = ridDealWith(newPageNo.val())
+            // totalCounts = totalCounts.val()
+            pagIng(newPageNo, pageCount)
 
-
-
-
-        provider.html(options);
-        provider.val(providerId)
-        productName.val(data.productName);
-        payment = payment.val(data.isPayment)
-        payId.val(payment)
-    })
+            provider.html(options);
+            provider.val(providerId)
+            productName.val(data.productName);
+            payment = payment.val(data.isPayment)
+            payId.val(payment)
+        }
+    )
 }
 
 
@@ -134,3 +110,5 @@ function billList(data) {
         tbody.insertAdjacentHTML('beforeend', rowHtml);
     })
 }
+
+

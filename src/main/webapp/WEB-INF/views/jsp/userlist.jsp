@@ -74,7 +74,7 @@
             </tr>
         </c:forEach>
     </table>
-    <%@include file="paging.jsp" %>
+    <%@include file="rollpage.jsp" %>
 </div>
 </section>
 <!--点击删除按钮后弹出的页面-->

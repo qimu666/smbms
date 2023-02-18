@@ -29,11 +29,6 @@ public class BillController {
     @Autowired
     private ProviderService providerService;
 
-    @GetMapping("/bills_list")
-    public String getBillList(@RequestParam(defaultValue = "1") Integer pageIndex, String productName, Integer isPayment, Integer providerId, Model model) {
-        return "billlist";
-    }
-
     @GetMapping("/bills")
     @ResponseBody
     public BaseResponse<HashMap<String, Object>> productName(@RequestParam(defaultValue = "1") Integer pageIndex, String productName, Integer isPayment, Integer providerId) {

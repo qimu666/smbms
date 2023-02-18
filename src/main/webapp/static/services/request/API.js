@@ -2,26 +2,38 @@ import {config, localhost} from "../../config/config.js";
 
 const NO_NEED_LOGIN_WHITE_LIST = ["/login", "/login.to", "/user/logout.do"];
 
-const _axios = axios.create(config)
+const request = axios.create(config);
 
-export async function get(url, params) {
-    const response = await _axios.get(url, {params});
-    return response.data;
-}
+request.interceptors.request.use(
+    (config) => {
+        // 处理请求前的逻辑
+        return config;
+    },
+    (error) => {
+        // 处理请求前发生的错误
+        return Promise.reject(error);
+    }
+);
 
-_axios.interceptors.response.use(
-    function (response) {
+request.interceptors.response.use(
+    (response) => {
+        // 处理请求成功的逻辑
         if (response.data.code === 40100) {
             if (!NO_NEED_LOGIN_WHITE_LIST.includes(location.pathname)) {
                 alert(response.data.message)
                 location.href = localhost + "/login"
             }
         }
-        return response;
+        return response.data;
     },
-    function (error) {
-        // 超出 2xx, 比如 4xx, 5xx 走这里
+    (error) => {
+        // 处理请求失败的逻辑
         return Promise.reject(error);
     }
 );
 
+export async function current() {
+    request.post('/user/current',{})
+}
+
+export default request;

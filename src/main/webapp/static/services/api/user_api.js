@@ -1,8 +1,9 @@
 import userListPath, {indexPath} from "../../config/config.js"
 import {_ajax as ajax, _fetch as fetch, ajaxResponse, fetchResponse} from "../interceptor/Request.js";
 import {cancleBtn, changeDLGContent} from "../../js/userlist.js";
-import {get} from "../request/API.js";
+import request from "../request/API.js";
 import {genderEnum, roleEnum} from "../common/commonEnum.js";
+import ridDealWith from "../common/common.js";
 
 
 let id = null
@@ -135,17 +136,7 @@ function forRole(data, rid, options) {
     return options
 }
 
-function ridDealWith(rid) {
-    if (rid === "") {
-        rid = 0
-    } else {
-        rid = parseInt(rid)
-    }
-    if (rid !== rid) {
-        rid = 0;
-    }
-    return rid
-}
+
 
 /** 删除用户 **/
 export function userDelete(obj) {
@@ -203,7 +194,7 @@ export function userView() {
     let urlParams = new URLSearchParams(window.location.search);
     let uid = urlParams.get('uid');
 
-    get(`/user/userView/${uid}`).then(data => {
+   request.get(`/user/userView/${uid}`).then(data => {
         data = data.data
         console.log(data)
         let span = document.querySelector(".providerView")
@@ -218,7 +209,6 @@ export function userView() {
 
         backBtn = $("#back");
         backBtn.on("click", function () {
-            //alert("view : "+referer);
             if (referer !== undefined && "" !== referer && "null" !== referer
                 && referer.length > 4) {
                 window.location.href = referer;

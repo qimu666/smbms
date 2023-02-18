@@ -218,7 +218,7 @@ public class IUserController {
      * @param request session
      * @return session中是否存在登录的用户信息
      */
-    @GetMapping("/current")
+    @PostMapping("/current")
     @ResponseBody
     public BaseResponse<User> getCurrentUser(HttpServletRequest request) {
         Object objUser = request.getSession().getAttribute(UserConstant.USER_LOGIN_STATUS);

@@ -1,6 +1,6 @@
 import {localhost} from "../config/config.js";
-import {getProductName, getProviderList} from "../services/api/bill_api.js";
-import {current} from "../services/interceptor/Request.js";
+import {getBills} from "../services/api/bill_api.js";
+import {current} from "../services/request/API.js";
 
 var BillObj;
 
@@ -26,11 +26,7 @@ export function changeDLGContent(contentStr) {
 
 $(function () {
     current()
-    // getIsPayment()
-    getProductName()
-    // 角色列表
-    getProviderList()
-
+    getBills()
     $(".viewBill").on("click", function () {
         //将被绑定的元素（a）转换成jquery对象，可以使用jquery方法
         var obj = $(this);

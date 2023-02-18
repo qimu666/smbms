@@ -12,29 +12,15 @@
 </head>
 <body>
 <div class="page-bar">
-    <ul class="page-num-ul clearfix">
-        <li>共<span id="totalCount">
-<%--            <input type="hidden" id="totalPageCount" value="${totalPageCount}"/>--%>
-        </span>条记录&nbsp;&nbsp;<span id="currentPageNo"> </span>/<span id="totalPageCount"></span>页
+    <ul id="pageUl" class="page-num-ul clearfix">
+        <li>共
+            <input type="hidden" id="totalCounts" value=""/>
+            <span id="totalCount"></span>条记录&nbsp;&nbsp;
+            <input type="hidden" id="newPageNo" value=""/>
+            <span id="currentPageNo"> </span>/
+            <input type="hidden" id="pageCount" value=""/>
+            <span id="totalPageCount"></span>页
         </li>
-        <
-        <c:choose>
-            <c:when test="${param.currentPageNo == param.totalPageCount}">
-                <a href="javascript:page_nav(document.forms[0],1);">首页</a>
-                <a href="javascript:page_nav(document.forms[0],${param.currentPageNo-1});">上一页</a>
-            </c:when>
-            <c:when test="${param.currentPageNo > 1}">
-                <a href="javascript:page_nav(document.forms[0],1);">首页</a>
-                <a href="javascript:page_nav(document.forms[0],${param.currentPageNo-1});">上一页</a>
-                <a href="javascript:page_nav(document.forms[0],${param.currentPageNo+1 });">下一页</a>
-                <a href="javascript:page_nav(document.forms[0],${param.totalPageCount});">最后一页</a>
-            </c:when>
-            <c:when test="${param.currentPageNo <= 1}">
-                <a href="javascript:page_nav(document.forms[0],${param.currentPageNo+1 });">下一页</a>
-                <a href="javascript:page_nav(document.forms[0],${param.totalPageCount});">最后一页</a>
-            </c:when>
-        </c:choose>
-        >
     </ul>
     <span class="page-go-form"><label>跳转至</label>
 	     <input type="text" name="inputPage" id="inputPage" class="page-key"/>页
